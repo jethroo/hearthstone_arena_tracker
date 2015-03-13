@@ -11,8 +11,9 @@ class Arena < ActiveRecord::Base
             :rexxar,
             :thrall,
             :uther,
-            :valera
+            :valeera
           ]
 
   enum hero: HEROS
+  validates :hero, inclusion: { in: HEROS.map{ |hero| hero.to_s } }
 end

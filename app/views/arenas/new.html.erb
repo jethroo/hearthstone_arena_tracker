@@ -9,7 +9,7 @@
 <% end %>
 
 <div class="hero-frame">
-  <%= image_tag("heros/none.jpg") %>
+  <%= image_tag("heroes/#{ arena.hero.present? ? arena.hero : "none" }.png") %>
 <div>
 
 <%= form_for(arena) do |f| %>
@@ -19,9 +19,16 @@
 
 <script>
   $(function(){
-    $("#new_arena #arena_hero").change(function () {
-      $(".hero-frame img").attr("src","images/heros/" + $('#arena_hero').val());
+    var hero_box = $("#new_arena #arena_hero")
+
+    hero_box.change(function () {
+      var hero = ($('#arena_hero').val() === "") ? "none" : $('#arena_hero').val()
+      var img_url = "<%= root_url %>" + "assets/heroes/" + hero + ".png"
+
+      $(".hero-frame img").attr("src", img_url);
     });
+
+    hero_box.trigger('change');
   });
 </script>
 
