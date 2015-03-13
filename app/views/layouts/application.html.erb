@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Hearthstone Arena Tracker" %></title>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "vendor/modernizr" %>
@@ -29,12 +29,28 @@
             <!-- Right Nav Section -->
             <ul class="right">
               <% if logged_in? %>
+                <li>
+                  <a href="<%= user_path(current_user) %>">
+                    <span class="fi-torso">
+                      <%= current_user.name %>
+                    </span>
+                  </a>
+                </li>
+
                 <li class="alert">
-                  <%= link_to('Logout', logout_path, method: :delete) %>
+                  <a href="<%= logout_path %>" data-method="delete" rel="nofollow">
+                    <span class="fi-x-circle">
+                      Logout
+                    </span>
+                  </a>
                 </li>
               <% else %>
                 <li class="active">
-                  <a href="#" data-reveal-id="loginModal">Login</a>
+                  <a href="#" data-reveal-id="loginModal">
+                    <span class="fi-unlock">
+                      Login
+                    </span>
+                  </a>
                 </li>
               <% end %>
             </ul>
