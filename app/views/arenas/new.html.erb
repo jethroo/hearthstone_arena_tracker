@@ -1,0 +1,27 @@
+<h2>Create a new arena</h2>
+
+<% if arena.errors.any? %>
+  <ul>
+    <% arena.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div class="hero-frame">
+  <%= image_tag("heros/none.jpg") %>
+<div>
+
+<%= form_for(arena) do |f| %>
+  <%= f.select :hero , Arena::HEROS, include_blank: true %>
+  <%= f.submit "Create", class: "button" %>
+<% end %>
+
+<script>
+  $(function(){
+    $("#new_arena #arena_hero").change(function () {
+      $(".hero-frame img").attr("src","images/heros/" + $('#arena_hero').val());
+    });
+  });
+</script>
+

@@ -7,14 +7,17 @@
     <title><%= content_for?(:title) ? yield(:title) : "Hearthstone Arena Tracker" %></title>
 
     <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= javascript_include_tag :modernizr %>
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
+    <script>
+      $(function() { $(document).foundation(); });
+    </script>
     <div class="container">
-      <div class="sticky row">
+      <div class="row">
         <nav class="top-bar" data-topbar role="navigation">
           <ul class="title-area">
             <li class="name">

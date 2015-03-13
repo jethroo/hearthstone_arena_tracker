@@ -12,11 +12,15 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require foundation
 //= require turbolinks
+//= require foundation
 //= require_tree .
 
-$(function(){
+$(function() {
   $(document).foundation();
+});
+
+$(function(){
+  console.log( "ready!" );
   window.setTimeout(function() {$(".alert-box a.close").trigger("click.fndtn.alert") }, 2000);
 });
