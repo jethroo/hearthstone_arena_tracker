@@ -26,6 +26,28 @@
             <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
           </ul>
           <section class="top-bar-section">
+            <!-- Left Nav Section -->
+            <% if logged_in? %>
+              <ul class="left">
+                <li class="has-dropdown">
+                  <a href="#">
+                    <span class="fi-torsos">
+                      Arenas
+                    <span>
+                  </a>
+                  <ul class="dropdown">
+                    <li class="active">
+                      <a href="<%= new_arena_path  %>">
+                        <span class="fi-plus">
+                          Add new Arena
+                        <span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            <% end %>
+
             <!-- Right Nav Section -->
             <ul class="right">
               <% if logged_in? %>
@@ -53,10 +75,6 @@
                   </a>
                 </li>
               <% end %>
-            </ul>
-
-            <!-- Left Nav Section -->
-            <ul class="left">
             </ul>
           </section>
         </nav>
