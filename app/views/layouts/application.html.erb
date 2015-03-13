@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <div class="sticky">
+      <nav class="top-bar" data-topbar role="navigation">
+        <ul class="title-area">
+          <li class="name">
+            <h1><a href="#">Hearthstone Arena Tracker</a></h1>
+          </li>
+           <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+          <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+        </ul>
+        <section class="top-bar-section">
+          <!-- Right Nav Section -->
+          <ul class="right">
+            <% if logged_in? %>
+              <li class="active">
+                <%= link_to('Logout', logout_path, method: :delete) %>
+              </li>
+            <% else %>
+              <li class="active">
+                <a href="#" data-reveal-id="loginModal">Login</a>
+              </li>
+            <% end %>
+          </ul>
+
+          <!-- Left Nav Section -->
+          <ul class="left">
+          </ul>
+        </section>
+      </nav>
+    </div>
+
+    <% flash.each do |name, msg| -%>
+      <div data-alert class="alert-box <%= name %>">
+        <%= msg %>
+        <a href="#" class="close">&times;</a>
+      </div>
+    <% end -%>
+
+    <div id="loginModal" class="reveal-modal" data-reveal>
+      <a class="close-reveal-modal">&#215;</a>
+      <h2>Login</h2>
+        <%= form_for(:session, url: login_path) do |f| %>
+
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control' %>
+
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control' %>
+
+        <%= f.submit "Log in", class: "button" %>
+      <% end %>
+
+      <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+    </div>
+
+    <div class="row">
+      <%= yield %>
+    </div>
+
+  </body>
+</html>
