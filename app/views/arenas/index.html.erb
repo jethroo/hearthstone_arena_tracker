@@ -14,7 +14,7 @@
       <% arenas.each do |no, arena| %>
         <tr>
           <td><%= no %></td>
-          <td><%= link_to arena.hero, arena_path(arena) %></td>
+          <td><%= image_tag("heroes/#{ arena.hero}_small_circle.png") %><%= link_to arena.hero, arena_path(arena) %></td>
           <td></td>
           <td></td>
         </tr>
