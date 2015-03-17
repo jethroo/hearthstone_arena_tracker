@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312204312) do
+ActiveRecord::Schema.define(version: 20150317080249) do
 
   create_table "arenas", force: :cascade do |t|
     t.integer  "hero",        limit: 4
@@ -33,7 +33,10 @@ ActiveRecord::Schema.define(version: 20150312204312) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.integer  "arena_id",   limit: 4
+    t.integer  "user_id",    limit: 4
   end
+
+  add_index "matches", ["user_id"], name: "index_matches_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name",            limit: 255
