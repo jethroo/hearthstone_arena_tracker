@@ -1,0 +1,47 @@
+<h2>Add a match with one click!</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th class="opponent"></th>
+      <% Arena::HEROS.each do |hero| %>
+        <th class="opponent"><%= hero.capitalize %> </th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th class="opponent">Win</th>
+      <% Arena::HEROS.each do |hero| %>
+        <td class="match_win"><%= link_to image_tag("heroes/#{hero}_small_circle.png"), create_remote_match_path(hero: hero, win: true), remote: true %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <th class="opponent">Loose</th>
+      <% Arena::HEROS.each do |hero| %>
+        <td class="match_loose"><%= link_to image_tag("heroes/#{hero}_small_circle.png"), create_remote_match_path(hero: hero, win: false), remote: true %></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Your Matches</h1>
+
+<div id="errors"/>
+
+<div id="my_matches"/>
+
+<script>
+  $(document).ready(
+   function(){
+     $(".match_win a")
+       .bind("ajax:success", function(evt, data, status, xhr){
+                               $("#my_matches").append("foo");
+                             })
+       .bind("ajax:error", function(evt, data, status, xhr){
+                             $("#errors").text(data);
+                           }
+        );
+    }
+  );
+</script>

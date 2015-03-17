@@ -1,3 +1,25 @@
 // Place all the styles related to the Matches controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.opponent {
+  @extend .td;
+  width: 75;
+}
+
+.match_win {
+  @extend .td;
+  background-color: green;
+  text-align: center;
+  vertical-align: middle;
+}
+.match_loose {
+  @extend .td;
+  background-color: red;
+}
+

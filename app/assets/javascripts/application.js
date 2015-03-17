@@ -21,6 +21,5 @@ $(function() {
 });
 
 $(function(){
-  console.log( "ready!" );
   window.setTimeout(function() {$(".alert-box a.close").trigger("click.fndtn.alert") }, 2000);
 });

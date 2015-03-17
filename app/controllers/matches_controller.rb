@@ -7,6 +7,10 @@ class MatchesController < ApplicationController
   def new
   end
 
+  def create_remote
+    render json: { foo: "bar" }
+  end
+
   def edit
   end
 
@@ -23,7 +27,7 @@ class MatchesController < ApplicationController
 
   def matches_by_arena_id(id)
     arena = current_user.arenas.where(id: params[:arena_id]).first
-    arena ? numbered_hash(arena.matches) || {}
+    arena ? numbered_hash(arena.matches) : {}
   end
 
   def numbered_hash(collection)
