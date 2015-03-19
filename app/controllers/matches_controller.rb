@@ -8,7 +8,14 @@ class MatchesController < ApplicationController
   end
 
   def create_remote
-    render json: { foo: "bar" }
+    if params.require(:hero) && params.require(:win)
+      match = Match.create(
+                user_id: current_user.id,
+                opponent: params[:hero],
+                won: params[:win]
+              )
+      render layout: false, locals: { match: match }
+    end
   end
 
   def edit

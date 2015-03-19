@@ -27,21 +27,41 @@
 
 <h2>Your Matches</h1>
 
-<div id="errors"/>
+<div id="error"/>
 
-<div id="my_matches"/>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th width="100">Result</th>
+        <th width="200">Opponent</th>
+        <th width="200">Created at</th>
+      </tr>
+    </thead>
+    <tbody id="my_matches">
+    </tbody>
+  </table>
+</div>
 
 <script>
   $(document).ready(
-   function(){
-     $(".match_win a")
-       .bind("ajax:success", function(evt, data, status, xhr){
-                               $("#my_matches").append("foo");
-                             })
-       .bind("ajax:error", function(evt, data, status, xhr){
-                             $("#errors").text(data);
-                           }
-        );
-    }
+    function(){
+      $(".match_win a")
+        .bind("ajax:success", function(evt, data, status, xhr){
+                                $("#my_matches").append(data);
+                              })
+        .bind("ajax:error", function(evt, data, status, xhr){
+                              $("#error").text(data);
+                            }
+      );
+      $(".match_loose a")
+        .bind("ajax:success", function(evt, data, status, xhr){
+                                $("#my_matches").append(data);
+                              })
+        .bind("ajax:error", function(evt, data, status, xhr){
+                              $("#error").text(data);
+                            }
+      );
+  }
   );
 </script>

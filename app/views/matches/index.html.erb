@@ -1,1 +1,26 @@
-<h2>matches#index</h1>
+<h2>Your matches</h1>
+
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th width="100">#</th>
+        <th width="100">Arena</th>
+        <th width="100">Result</th>
+        <th width="200">Opponent</th>
+        <th width="200">Created at</th>
+      </tr>
+    </thead>
+    <tbody id="my_matches">
+      <% matches.each do |no, match| %>
+        <tr>
+          <td><%= no %>
+          <td></td>
+          <td class="match_<%= match.won ? "win" : "loose"%>"></td>
+          <td><%= image_tag("heroes/#{match.opponent}_small_circle.png") %></td>
+          <td><%= match.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
