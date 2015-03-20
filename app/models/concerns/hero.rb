@@ -12,4 +12,9 @@ module Hero
           :uther,
           :valeera
         ]
+
+  included do
+    enum hero: HEROS
+    validates :hero, inclusion: { in: HEROS.map{ |hero| hero.to_s } }
+  end
 end
