@@ -1,3 +1,6 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$(document).on "page:change", ->
+  $(".match_win a, .match_loose a")
+    .bind "ajax:success", (evt, data, status, xhr) ->
+      $("#my_matches").append(data)
+    .bind "ajax:error", (evt, data, status, xhr) ->
+      $("#error").append(data)

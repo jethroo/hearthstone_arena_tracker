@@ -42,26 +42,3 @@
     </tbody>
   </table>
 </div>
-
-<script>
-  $(document).ready(
-    function(){
-      $(".match_win a")
-        .bind("ajax:success", function(evt, data, status, xhr){
-                                $("#my_matches").append(data);
-                              })
-        .bind("ajax:error", function(evt, data, status, xhr){
-                              $("#error").text(data);
-                            }
-      );
-      $(".match_loose a")
-        .bind("ajax:success", function(evt, data, status, xhr){
-                                $("#my_matches").append(data);
-                              })
-        .bind("ajax:error", function(evt, data, status, xhr){
-                              $("#error").text(data);
-                            }
-      );
-  }
-  );
-</script>

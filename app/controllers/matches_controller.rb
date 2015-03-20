@@ -11,7 +11,7 @@ class MatchesController < ApplicationController
     if params.require(:hero) && params.require(:win)
       match = Match.create(
                 user_id: current_user.id,
-                opponent: params[:hero],
+                opponent: "opponent_#{params[:hero]}",
                 won: params[:win]
               )
       render layout: false, locals: { match: match }
@@ -23,7 +23,7 @@ class MatchesController < ApplicationController
   def create
      match = Match.create(
                 user_id: current_user.id,
-                opponent: params[:hero],
+                opponent: "opponent_#{params[:hero]}",
                 won: params[:win]
               )
 
