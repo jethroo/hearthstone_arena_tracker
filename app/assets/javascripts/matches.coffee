@@ -11,8 +11,12 @@ $(document).on "page:change", ->
             "opponent": $(this).attr("value")
             "win": $(this).parent().attr("class") == "match_win"
         success: (data) ->
-          $("#my_matches").append(data)
-          return
+          $("#my_matches").prepend(data)
+            .bind "ajax:success", (evt, data, status, xhr) ->
+              $(evt.target).parent().remove()
+            .bind "ajax:error", (evt, data, status, xhr) ->
+              alert("error")
         error: (data) ->
           $("#error").append(data)
           return
+  $(".match_result_row")

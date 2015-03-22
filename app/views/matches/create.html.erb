@@ -1,7 +1,12 @@
-<tr>
-  <td class="match_<%= match.won ? "win" : "loose"%>">
-    <%= image_tag("heroes/#{match.hero}_small_circle.png") %>
-  </td>
-  <td><%= image_tag("heroes/#{match.opponent}_small_circle.png") %></td>
-  <td><%= match.created_at %></td>
-</tr>
+<div class="row">
+  <div class="match_result_row  <%= match.won ? "win" : "loose"%>">
+    <%= match.hero ? image_tag("heroes/#{match.hero}_small_circle.png") : "" %>
+    vs.
+    <%= image_tag("heroes/#{match.opponent}_small_circle.png") %>
+    <%= match.created_at %>
+    <a href="<%= match_path(match) %>" data-method="delete" data-remote="true">
+      <span class="fi-minus button tiny alert">
+      <span>
+    </a>
+  </div>
+</div>

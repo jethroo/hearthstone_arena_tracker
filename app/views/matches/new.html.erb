@@ -1,11 +1,10 @@
-<h2>Add a match with one click!</h1>
-
-<div id="new_matches" data-action-url="<%= matches_path %>">
-</div>
-<div class="small-12 columns">
-  <div class="matches_grid small-block-grid-3 medium-block-grid-6 large-block-grid-9">
+<div class="row">
+  <h2>Add a match with one click!</h1>
+  <div id="new_matches" data-action-url="<%= matches_path %>">
+  </div>
+  <div class="small-block-grid-3 medium-block-grid-6 large-block-grid-9">
     <% %w(win loose).each do |result| %>
-      <% Arena::HEROS.each do |hero| %>
+     <% Arena::HEROS.each do |hero| %>
         <li class="match_<%= result %>">
           <%= link_to image_tag("heroes/#{hero}_small_circle.png"),"#", value: "#{hero}" %>
         </li>
@@ -14,24 +13,15 @@
   </div>
 </div>
 
-<div style="clear: both;"></div>
+<div class="row">
+  <hr>
 
-<hr>
-<h2>Your Matches</h1>
+  <h2>Your recent matches</h1>
 
-<div id="error">
+  <div id="error">
+  </div>
 </div>
 
-<div>
-  <table>
-    <thead>
-      <tr>
-        <th width="100">Result</th>
-        <th width="100">Opponent</th>
-        <th width="200">Created at</th>
-      </tr>
-    </thead>
-    <tbody id="my_matches">
-    </tbody>
-  </table>
+<div id="my_matches">
 </div>
+

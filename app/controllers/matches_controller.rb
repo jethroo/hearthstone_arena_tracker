@@ -28,6 +28,13 @@ class MatchesController < ApplicationController
   end
 
   def destroy
+    match = current_user.matches.where(id: params[:id]).first
+    if match
+      match.destroy
+      head :ok, content_type: "text/html"
+    else
+      head :not_found, content_type: "text/html"
+    end
   end
 
   private

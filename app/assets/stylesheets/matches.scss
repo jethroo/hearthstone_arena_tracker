@@ -10,17 +10,33 @@
   text-align: center;
 }
 
+.match_result_row {
+  display: inline-block;
+  margin:-1px;
+  border:1px solid white;
+  padding: 10px;
+}
+
 .match img {
   padding-top: 20px;
 }
 
-.match_win {
-  @extend .match;
+.win {
   background-color: green;
 }
+
+.loose {
+  background-color: red;
+}
+
+.match_win {
+  @extend .match;
+  @extend .win;
+}
+
 .match_loose {
   @extend .match;
-  background-color: red;
+  @extend .loose;
 }
 
 .column, .columns{
