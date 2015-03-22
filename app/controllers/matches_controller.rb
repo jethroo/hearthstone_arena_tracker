@@ -1,6 +1,6 @@
 class MatchesController < ApplicationController
   def index
-    matches = params[:arena_id] ? matches_by_arena_id( params[:arena_id]) : numbered_hash(current_user.matches)
+    matches = params[:arena_id] ? current_user.arenas.where(id: params[:arena_id]).first : current_user.matches
     render locals: { matches: matches }
   end
 
@@ -8,15 +8,14 @@ class MatchesController < ApplicationController
   end
 
   def create
-    if params.require(:opponent) && params.require(:win) && params.require(:hero)
-      match = Match.create(
-                user_id: current_user.id,
-                hero: params[:hero],
-                opponent: "opponent_#{params[:opponent]}",
-                won: params[:win]
-              )
-      render layout: false, locals: { match: match.decorate }
-    end
+    match_params
+    match = Match.create(
+              user_id: current_user.id,
+              hero: params[:match][:hero],
+              opponent: "opponent_#{params[:match][:opponent]}",
+              won: params[:match][:win]
+            )
+    render layout: false, locals: { match: match.decorate }
   end
 
   def edit
@@ -35,14 +34,5 @@ class MatchesController < ApplicationController
 
   def match_params
     params.require(:match).permit(:hero, :win, :opponent)
-  end
-
-  def matches_by_arena_id(id)
-    arena = current_user.arenas.where(id: params[:arena_id]).first
-    arena ? numbered_hash(arena.matches) : {}
-  end
-
-  def numbered_hash(collection)
-    Hash[(1...collection.size+1).zip collection]
   end
 end

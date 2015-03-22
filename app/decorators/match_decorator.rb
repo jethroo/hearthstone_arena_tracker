@@ -6,6 +6,6 @@ class MatchDecorator < Draper::Decorator
   end
 
   def created_at
-    object.created_at.strftime("%d.%m.%Y, %H:%M")
+    object.created_at.strftime("%d.%m.%Y %H:%M")
   end
 end

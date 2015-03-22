@@ -2,24 +2,27 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.td {
+@import "foundation";
+
+.match {
+  margin:-1px;
+  border:1px solid white;
   text-align: center;
-  vertical-align: middle;
 }
 
-.opponent {
-  @extend .td;
-  width: 75;
+.match img {
+  padding-top: 20px;
 }
 
 .match_win {
-  @extend .td;
+  @extend .match;
   background-color: green;
-  text-align: center;
-  vertical-align: middle;
 }
 .match_loose {
-  @extend .td;
+  @extend .match;
   background-color: red;
 }
 
+.column, .columns{
+  min-height: 1px;
+}

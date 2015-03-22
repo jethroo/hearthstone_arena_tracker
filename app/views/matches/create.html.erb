@@ -1,5 +1,7 @@
 <tr>
-  <td class="match_<%= match.won ? "win" : "loose"%>"></td>
+  <td class="match_<%= match.won ? "win" : "loose"%>">
+    <%= image_tag("heroes/#{match.hero}_small_circle.png") %>
+  </td>
   <td><%= image_tag("heroes/#{match.opponent}_small_circle.png") %></td>
   <td><%= match.created_at %></td>
 </tr>

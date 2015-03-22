@@ -1,51 +1,7 @@
-<h2>Your matches</h1>
-
-<div class="row">
-  <div class="small-2 columns hide-on-phones">
-  </div>
-  <div class="small-1 columns">
-    #
-  </div>
-  <div class="small-1 columns">
-    Arena
-  </div>
-  <div class="small-1 columns">
-    Result
-  </div>
-  <div class="small-2 columns">
-    Hero
-  </div>
-  <div class="small-2 columns">
-    Opponent
-  </div>
-  <div class="small-2 columns">
-    Created at
-  </div>
-  <div class="small-2 columns hide-on-phones">
-  </div>
+<div class="small-offset-1">
+  <h2>Your matches</h1>
 </div>
 
-<div>
-  <table>
-    <thead>
-      <tr>
-        <th width="100">#</th>
-        <th width="100">Arena</th>
-        <th width="100">Result</th>
-        <th width="200">Opponent</th>
-        <th width="200">Created at</th>
-      </tr>
-    </thead>
-    <tbody id="my_matches">
-      <% matches.each do |no, match| %>
-        <tr>
-          <td><%= no %>
-          <td></td>
-          <td class="match_<%= match.won ? "win" : "loose"%>"></td>
-          <td><%= image_tag("heroes/#{match.opponent}_small_circle.png") %></td>
-          <td><%= match.created_at %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+<ul>
+  <%= render partial: "match_index_row", collection: matches.decorate, as: :match %>
+</ul>

@@ -122,10 +122,11 @@
 
         <p>New user? <%= link_to "Sign up now!", signup_path %></p>
       </div>
-
-      <div class="row">
-        <%= yield %>
-      </div>
+      <section class="scroll-container" role="main">
+        <div class="row">
+          <%= yield %>
+        </div>
+      </section>
     </div>
   </body>
 </html>

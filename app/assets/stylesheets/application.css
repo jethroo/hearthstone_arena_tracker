@@ -17,3 +17,7 @@
  *= require static_pages
 
  */
+
+h2 {
+  font-size: 1.4rem;
+}
