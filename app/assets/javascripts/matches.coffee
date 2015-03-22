@@ -17,8 +17,12 @@ $(document).on "page:change", ->
             .bind "ajax:error", (evt, data, status, xhr) ->
               alert("error")
         error: (data) ->
-          $("#error").append(data)
-          return
+          $("#flash_errors").append(data.responseText)
+          window.setTimeout (->
+            $(".alert-box a.close").trigger("click.fndtn.alert")
+            return
+          ), 2000
+          $(document).foundation('alert', 'reflow');
   $("#hero").change (e) ->
     selected = $(this).val()
     hero = if selected == "" then "none" else selected

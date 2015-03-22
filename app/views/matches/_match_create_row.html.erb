@@ -1,0 +1,12 @@
+<div class="large-12">
+  <div class="match_result_row  <%= match.won ? "win" : "loose"%>">
+    <%= match.hero ? image_tag("heroes/#{match.hero}_small_circle.png") : "" %>
+    vs.
+    <%= image_tag("heroes/#{match.opponent}_small_circle.png") %>
+    <%= match.created_at %>
+    <a href="<%= match_path(match) %>" data-method="delete" data-remote="true">
+      <span class="fi-minus button tiny alert">
+      <span>
+    </a>
+  </div>
+</div>

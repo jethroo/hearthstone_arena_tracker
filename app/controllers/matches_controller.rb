@@ -5,6 +5,7 @@ class MatchesController < ApplicationController
   end
 
   def new
+    render locals: { matches: current_user.matches.order(created_at: :desc).limit(10) }
   end
 
   def create
@@ -15,7 +16,11 @@ class MatchesController < ApplicationController
               opponent: "opponent_#{params[:match][:opponent]}",
               won: params[:match][:win]
             )
-    render layout: false, locals: { match: match.decorate }
+    if match.valid?
+      render layout: false, locals: { match: match.decorate }
+    else
+      render template: "matches/ajax_error", layout: false, status: :error, locals: { match: match.decorate }
+    end
   end
 
   def edit

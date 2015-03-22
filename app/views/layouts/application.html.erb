@@ -99,12 +99,14 @@
         </nav>
       </div>
 
-      <% flash.each do |name, msg| -%>
-        <div data-alert class="row alert-box <%= name %>">
-          <%= msg %>
-          <a href="#" class="close">&times;</a>
-        </div>
-      <% end -%>
+      <div id="flash_errors">
+        <% flash.each do |name, msg| -%>
+          <div data-alert class="row alert-box <%= name %>">
+            <%= msg %>
+            <a href="#" class="close">&times;</a>
+          </div>
+        <% end -%>
+      </div>
 
       <div id="loginModal" class="reveal-modal" data-reveal>
         <a class="close-reveal-modal">&#215;</a>
@@ -122,7 +124,7 @@
 
         <p>New user? <%= link_to "Sign up now!", signup_path %></p>
       </div>
-      <div class="row">
+      <div id="content" class="row">
         <%= yield %>
       </div>
     </div>
