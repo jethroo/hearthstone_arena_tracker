@@ -7,29 +7,15 @@ class MatchesController < ApplicationController
   def new
   end
 
-  def create_remote
-    if params.require(:hero) && params.require(:win)
+  def create
+    if params.require(:opponent) && params.require(:win) && params.require(:hero)
       match = Match.create(
                 user_id: current_user.id,
-                opponent: "opponent_#{params[:hero]}",
+                hero: params[:hero],
+                opponent: "opponent_#{params[:opponent]}",
                 won: params[:win]
               )
-      render layout: false, locals: { match: match }
-    end
-  end
-
-  # TODO: do js the rails way!
-  #https://pragmaticstudio.com/blog/2015/3/18/rails-jquery-ajax?utm_source=rubyweekly&utm_medium=email
-  def create
-     match = Match.create(
-                user_id: current_user.id,
-                opponent: "opponent_#{params[:hero]}",
-                won: params[:win]
-              )
-
-    respond_to do |format|
-      format.html { render locals: match }
-      format.js { render locals: match }
+      render layout: false, locals: { match: match.decorate }
     end
   end
 

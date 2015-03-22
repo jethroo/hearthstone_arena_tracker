@@ -1,6 +1,6 @@
 <h2>Add a match with one click!</h1>
 
-<table>
+<table id="new_matches" data-action-url="<%= matches_path %>">
   <thead>
     <tr>
       <th class="opponent"></th>
@@ -13,13 +13,13 @@
     <tr>
       <th class="opponent">Win</th>
       <% Arena::HEROS.each do |hero| %>
-        <td class="match_win"><%= link_to image_tag("heroes/#{hero}_small_circle.png"), create_remote_match_path(hero: hero, win: true), remote: true %></td>
+        <td class="match_win"><%= link_to image_tag("heroes/#{hero}_small_circle.png"),"#", value: "#{hero}" %></td>
       <% end %>
     </tr>
     <tr>
       <th class="opponent">Loose</th>
       <% Arena::HEROS.each do |hero| %>
-        <td class="match_loose"><%= link_to image_tag("heroes/#{hero}_small_circle.png"), create_remote_match_path(hero: hero, win: false), remote: true %></td>
+        <td class="match_loose"><%= link_to image_tag("heroes/#{hero}_small_circle.png"),"#", value: "#{hero}" %></td>
       <% end %>
     </tr>
   </tbody>

@@ -6,5 +6,4 @@ Rails.application.routes.draw do
   resources :users
   resources :arenas
   resources :matches
-  get    'create_remote_match'  => 'matches#create_remote'
 end
