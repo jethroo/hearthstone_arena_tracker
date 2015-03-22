@@ -1,4 +1,17 @@
-<div class="row">
+<div class="large-12">
+  <h2>Choose your hero</h1>
+  <div class="large-2">
+    <div class="hero-frame">
+      <%= image_tag("heroes/none.png") %>
+    </div>
+  </div>
+  <div class="large-2">
+    <%= select_tag :hero, options_for_select(Arena::HEROS), include_blank: true %>
+  </div>
+</div>
+
+<div class="large-12">
+  <hr>
   <h2>Add a match with one click!</h1>
   <div id="new_matches" data-action-url="<%= matches_path %>">
   </div>
@@ -13,15 +26,15 @@
   </div>
 </div>
 
-<div class="row">
+<div class="large-12">
   <hr>
-
   <h2>Your recent matches</h1>
-
   <div id="error">
   </div>
 </div>
 
-<div id="my_matches">
+<div class="large-12">
+  <div id="my_matches">
+  </div>
 </div>
 

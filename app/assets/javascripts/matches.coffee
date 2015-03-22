@@ -7,7 +7,7 @@ $(document).on "page:change", ->
         type: "POST"
         data:
           "match":
-            "hero": "anduin"
+            "hero": $("#hero").val()
             "opponent": $(this).attr("value")
             "win": $(this).parent().attr("class") == "match_win"
         success: (data) ->
@@ -19,4 +19,8 @@ $(document).on "page:change", ->
         error: (data) ->
           $("#error").append(data)
           return
-  $(".match_result_row")
+  $("#hero").change (e) ->
+    selected = $(this).val()
+    hero = if selected == "" then "none" else selected
+    $(".hero-frame img").attr("src", "/assets/heroes/"+hero+".png")
+  $("#hero").trigger("change")
