@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 @import "foundation";
+@import "compass";
 
 .match {
   margin:-1px;
@@ -22,11 +23,15 @@
 }
 
 .win {
-  background-color: green;
+  background-color: #43d84d; // Old browsers
+  @include filter-gradient(#43d84d, #1f3b08, horizontal); // IE6-9 fallback on horizontal gradient
+  @include background-image(linear-gradient(left top,  #43d84d 0%,#1f3b08 100%));
 }
 
 .loose {
-  background-color: red;
+  background-color: #cc0000; // Old browsers
+  @include filter-gradient(#cc0000, #680000, horizontal); // IE6-9
+  @include background-image(linear-gradient(left,  #cc0000 0%,#680000 100%));
 }
 
 .match_win {

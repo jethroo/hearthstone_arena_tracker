@@ -5,7 +5,7 @@ class MatchesController < ApplicationController
   end
 
   def new
-    render locals: { matches: current_user.matches.order(created_at: :desc).limit(10) }
+    render locals: { matches: current_user.matches.order(created_at: :desc).limit(12) }
   end
 
   def create

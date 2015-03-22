@@ -11,6 +11,7 @@ gem 'sass-rails', '~> 5.0'
 
 gem 'foundation-rails'
 gem 'modernizr-rails'
+gem 'compass-rails'
 
 gem 'draper', '~> 1.3'
 

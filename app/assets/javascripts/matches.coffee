@@ -13,7 +13,7 @@ $(document).on "page:change", ->
         success: (data) ->
           $("#my_matches").prepend(data)
             .bind "ajax:success", (evt, data, status, xhr) ->
-              $(evt.target).parent().remove()
+              $(evt.target).parent().parent().remove()
             .bind "ajax:error", (evt, data, status, xhr) ->
               alert("error")
         error: (data) ->

@@ -1,18 +1,13 @@
-<div class="large-12">
-  <h2>Choose your hero</h1>
-  <div class="large-2">
-    <div class="hero-frame">
-      <%= image_tag("heroes/none.png") %>
-    </div>
+<br>
+<div class="medium-4 large-2 columns">
+  <div class="hero-frame">
+    <%= image_tag("heroes/none.png") %>
   </div>
-  <div class="large-2">
-    <%= select_tag :hero, options_for_select(Arena::HEROS), include_blank: true %>
-  </div>
+  <%= select_tag :hero, options_for_select(Arena::HEROS), include_blank: true %>
 </div>
 
-<div class="large-12">
-  <hr>
-  <h2>Add a match with one click!</h1>
+<div class="medium-8 large-10 columns">
+  <h2>Add a match with one click!</h2>
   <div id="new_matches" data-action-url="<%= matches_path %>">
   </div>
   <div class="small-block-grid-3 medium-block-grid-6 large-block-grid-9">
@@ -28,7 +23,7 @@
 
 <div class="large-12">
   <hr>
-  <h2>Your recent matches</h1>
+  <h2>Your recent matches</h2>
   <div id="error">
   </div>
 </div>
