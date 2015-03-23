@@ -1,0 +1,37 @@
+<br>
+<div class="medium-4 large-2 columns">
+  <div class="hero-frame">
+    <%= image_tag("heroes/#{arena.hero}.png") %>
+    <%= hidden_field_tag 'hero', arena.hero %>
+    <%= hidden_field_tag 'arena', arena.id %>
+  </div>
+</div>
+
+<div class="medium-8 large-10 columns">
+  <h2>Add a match with one click!</h2>
+  <div id="new_matches" data-action-url="<%= matches_path %>">
+  </div>
+  <div class="small-block-grid-3 medium-block-grid-6 large-block-grid-9">
+    <% %w(win loose).each do |result| %>
+     <% Arena::HEROS.each do |hero| %>
+        <li class="match_<%= result %>">
+          <%= link_to image_tag("heroes/#{hero}_small_circle.png"),"#", value: "#{hero}" %>
+        </li>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="large-12">
+  <hr>
+  <h2>Your arena matches</h2>
+  <div id="error">
+  </div>
+</div>
+
+<div class="large-12">
+  <div id="my_matches">
+    <%= render partial: "matches/match_create_row", collection: arena.matches.decorate, as: :match %>
+  </div>
+</div>
+

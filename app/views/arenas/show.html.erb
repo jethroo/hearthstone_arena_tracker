@@ -1,3 +1,5 @@
-<div class="hero-frame">
-  <%= image_tag("heroes/#{ arena.hero.present? ? arena.hero : "none" }.png") %>
-<div>
+<% if arena.finished? %>
+  <%= render partial: "finished", locals: { arena: arena } %>
+<% else %>
+  <%= render partial: "open", locals: { arena: arena } %>
+<% end %>

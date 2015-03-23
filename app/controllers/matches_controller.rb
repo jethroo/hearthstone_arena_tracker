@@ -9,14 +9,8 @@ class MatchesController < ApplicationController
   end
 
   def create
-    match_params
-    match = Match.create(
-              user_id: current_user.id,
-              hero: params[:match][:hero],
-              opponent: "opponent_#{params[:match][:opponent]}",
-              won: params[:match][:win]
-            )
-    if match.valid?
+    match = Match.new(match_params)
+    if match.save
       render layout: false, locals: { match: match.decorate }
     else
       render template: "matches/ajax_error", layout: false, status: :error, locals: { match: match.decorate }
@@ -45,6 +39,20 @@ class MatchesController < ApplicationController
   private
 
   def match_params
-    params.require(:match).permit(:hero, :win, :opponent)
+    params.require(:match).permit(:hero, :win, :opponent, :arena)
+    match_hash = {
+                    user_id: current_user.id,
+                    hero: match[:hero],
+                    opponent: "opponent_#{match[:opponent]}",
+                    won: match[:win]
+                 }
+    if  match[:arena] &&  match[:arena].present? && current_user.arenas.exists?(match[:arena])
+      match_hash.merge!(arena_id: match[:arena])
+    end
+    match_hash
+  end
+
+  def match
+    params[:match]
   end
 end

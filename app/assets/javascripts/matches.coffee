@@ -8,6 +8,7 @@ $(document).on "page:change", ->
         data:
           "match":
             "hero": $("#hero").val()
+            "arena": $("#arena").val() if $("#arena")
             "opponent": $(this).attr("value")
             "win": $(this).parent().attr("class") == "match_win"
         success: (data) ->

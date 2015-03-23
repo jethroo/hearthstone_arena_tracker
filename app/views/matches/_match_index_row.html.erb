@@ -4,11 +4,11 @@
       <div class="round info label">
         <%= match_counter + 1 %>
       </div>
-    </div>
-    <div class="row">
-      <% if match.arena %>
-        Arena: <%= link_to match.arena.id, arena_path(match.arena) %>
-      <% end %>
+      <div class="arena">
+        <% if match.arena %>
+          Arena: <%= link_to match.arena.id, arena_path(match.arena) %>
+        <% end %>
+      </div>
     </div>
     <div class="row">
       <%= match.hero ? image_tag("heroes/#{match.hero}_small_circle.png") : "" %>
