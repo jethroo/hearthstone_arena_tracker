@@ -1,23 +1,30 @@
-<div class="row">
-  <div class="small-1 columns hide-on-phones">
+<div class="small-12 medium-6 large-4 columns match_result_box <%= match.won ? "win" : "loose"%>">
+  <div class="match_result">
+    <div class="row match_counter">
+      <div class="round info label">
+        <%= match_counter + 1 %>
+      </div>
+    </div>
+    <div class="row">
+      <% if match.arena %>
+        Arena: <%= link_to match.arena.id, arena_path(match.arena) %>
+      <% end %>
+    </div>
+    <div class="row">
+      <%= match.hero ? image_tag("heroes/#{match.hero}_small_circle.png") : "" %>
+      vs.
+      <%= image_tag("heroes/#{match.opponent}_small_circle.png") %>
+    </div>
+    <div class="row">
+      <%= match.created_at %>
+    </div>
   </div>
-  <div class="small-1 columns match_<%= match.won ? "win" : "loose"%>">
-    <%= match_counter %>
-  </div>
-  <div class="small-1 columns">
-    <% if match.arena %>
-      <%= link_to match.arena.id, arena_path(match.arena) %>
-    <% end %>
-  </div>
-  <div class="small-1 columns">
-    <%= match.hero ? image_tag("heroes/#{match.hero}_small_circle.png") : "" %>
-  </div>
-  <div class="small-1 columns">
-    <%= image_tag("heroes/#{match.opponent}_small_circle.png") %>
-  </div>
-  <div class="small-1 columns">
-    <%= match.created_at %>
-  </div>
-  <div class="small-6 columns hide-on-phones">
-  </div>
+  <% if false %>
+    <div class="row">
+      <a href="<%= match_path(match) %>" data-method="delete" data-remote="true" class="delete_button">
+        <div class="fi-minus button tiny round secondary">
+        </div>
+      </a>
+    </div>
+  <% end %>
 </div>
