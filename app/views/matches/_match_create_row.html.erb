@@ -1,12 +1,18 @@
-<div class="small-12 medium-6 large-4 columns">
-  <div class="match_result_row  <%= match.won ? "win" : "loose"%>">
-    <%= match.hero ? image_tag("heroes/#{match.hero}_small_circle.png") : "" %>
-    vs.
-    <%= image_tag("heroes/#{match.opponent}_small_circle.png") %>
-    <%= match.created_at %>
-    <a href="<%= match_path(match) %>" data-method="delete" data-remote="true">
-      <span class="fi-minus button tiny round secondary">
-      <span>
+<div class="small-12 medium-6 large-4 columns match_result_box <%= match.won ? "win" : "loose"%>">
+  <div class="match_result">
+    <div class="row">
+      <%= match.hero ? image_tag("heroes/#{match.hero}_small_circle.png") : "" %>
+      vs.
+      <%= image_tag("heroes/#{match.opponent}_small_circle.png") %>
+    </div>
+    <div class="row">
+      <%= match.created_at %>
+    </div>
+  </div>
+  <div class="row">
+    <a href="<%= match_path(match) %>" data-method="delete" data-remote="true" class="delete_button">
+      <div class="fi-minus button tiny round secondary">
+      </div>
     </a>
   </div>
 </div>

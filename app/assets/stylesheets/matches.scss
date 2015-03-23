@@ -11,13 +11,6 @@
   text-align: center;
 }
 
-.match_result_row {
-  display: inline-block;
-  margin:-1px;
-  border:1px solid white;
-  padding: 10px;
-}
-
 .match img {
   padding-top: 20px;
 }
@@ -46,4 +39,24 @@
 
 .column, .columns{
   min-height: 1px;
+}
+
+.delete_button {
+  display: inline;
+  float: right;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-left: -30px;
+}
+
+.match_result_box {
+  display: table;
+  border:1px solid white;
+}
+
+.match_result {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding: 10px;
 }
