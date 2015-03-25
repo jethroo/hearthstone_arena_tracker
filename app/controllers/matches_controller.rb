@@ -18,9 +18,11 @@ class MatchesController < ApplicationController
   end
 
   def edit
+
   end
 
   def show
+
   end
 
   def update
@@ -40,19 +42,20 @@ class MatchesController < ApplicationController
 
   def match_params
     params.require(:match).permit(:hero, :win, :opponent, :arena)
+    match_hash(params[:match])
+  end
+
+  def match_hash(match)
     match_hash = {
                     user_id: current_user.id,
                     hero: match[:hero],
                     opponent: "opponent_#{match[:opponent]}",
                     won: match[:win]
                  }
-    if  match[:arena] &&  match[:arena].present? && current_user.arenas.exists?(match[:arena])
+    if match[:arena] && match[:arena].present? && current_user.arenas.exists?(match[:arena])
       match_hash.merge!(arena_id: match[:arena])
     end
-    match_hash
-  end
 
-  def match
-    params[:match]
+    match_hash
   end
 end
