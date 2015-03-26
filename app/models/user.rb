@@ -6,5 +6,11 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :name, uniqueness: true
-  validates :password, length: { minimum: 6 }
+  validates :password, length: { minimum: 6 }, if: :password_required?
+
+  private
+
+  def password_required?
+    self.new_record? or self.password?
+  end
 end

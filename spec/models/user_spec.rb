@@ -1,12 +1,9 @@
-=begin
-  class User < ActiveRecord::Base
-    has_secure_password
+require 'rails_helper'
 
-    has_many :arenas
-    has_many :matches
-
-    validates :name, presence: true, length: { maximum: 50 }
-    validates :name, uniqueness: true
-    validates :password, length: { minimum: 6 }
-  end
-=end
+describe User do
+  it { should have_secure_password }
+  it { should validate_uniqueness_of(:name) }
+  it { should validate_presence_of(:name) }
+  it { should ensure_length_of(:name).is_at_most(50) }
+  it { should ensure_length_of(:password).is_at_least(6) }
+end
