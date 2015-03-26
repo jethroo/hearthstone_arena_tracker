@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 describe Arena do
-  subject { Arena.new }
+  subject { described_class.new }
 
   context "module inclusion" do
     it "should include Hero" do
-      expect(Arena.included_modules).to include(Hero)
+      expect(described_class.included_modules).to include(Hero)
     end
   end
 
