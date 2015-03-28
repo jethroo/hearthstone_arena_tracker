@@ -6,4 +6,7 @@ Rails.application.routes.draw do
   resources :users
   resources :arenas
   resources :matches
+
+  get "stats"      => "stats#overview"
+  get "stats/win_loss"      => "stats#win_loss", defaults: { format: :json }
 end

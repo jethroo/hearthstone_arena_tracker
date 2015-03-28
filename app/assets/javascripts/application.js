@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require foundation
 //= require matches
+//= require highcharts
 //= require_tree .
 
 $(function() {
