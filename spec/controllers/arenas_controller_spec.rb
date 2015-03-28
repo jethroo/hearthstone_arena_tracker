@@ -72,26 +72,50 @@ describe ArenasController, type: :controller do
 
   describe "show" do
     context "if arena found" do
+      let(:arenas) do
+        double("arenas", where: double("dataset", first: Arena.new))
+      end
 
+      before do
+        allow(user).to receive(:arenas).and_return(arenas)
+        allow(controller).to receive(:render)
+      end
+
+      after do
+        expect(user).to have_received(:arenas)
+        expect(controller)
+          .to have_received(:render)
+            .with(locals: { arena: instance_of(Arena) })
+      end
+
+      it "renders show" do
+        get :show, { id: 1 }
+      end
     end
 
     context "if arena not found" do
+      let(:arenas) do
+        double("arenas", where: [])
+      end
 
+      before do
+        allow(user).to receive(:arenas).and_return(arenas)
+        get :show, { id: 1 }
+      end
+
+      after do
+        expect(user).to have_received(:arenas)
+      end
+
+      it "redirects to root" do
+        expect(response).to be_redirect
+        expect(flash[:alert]).to eq("Arena not found")
+      end
     end
   end
 end
 
 =begin
-
-  def show
-    arena = current_user.arenas.where(id: params[:id]).first
-    if arena
-      render locals: { arena: arena }
-    else
-      redirect_to :root, alert: "Arena not found"
-    end
-  end
-
   def update
 
   end
