@@ -1,7 +1,7 @@
 winLoss = (data) ->
-  $('#chart').highcharts
+  $('#win_loss_hero').highcharts
     chart: type: 'column'
-    title: text: 'Played Hero'
+    title: text: 'by played hero'
     xAxis: categories: [
       'Win'
       'Loose'
@@ -11,7 +11,7 @@ winLoss = (data) ->
   return
 
 $(document).on "page:change", ->
-  if ($('#chart').length)
+  if ($('#win_loss_hero').length)
     $.ajax
       url: '/stats/win_loss'
       type: 'GET'
