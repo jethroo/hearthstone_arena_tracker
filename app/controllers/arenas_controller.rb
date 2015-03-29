@@ -24,7 +24,14 @@ class ArenasController < ApplicationController
   end
 
   def update
-
+    update_params
+    arena = current_user.arenas.where(id: params[:id]).first
+    if arena
+      arena.set_rewards!(params[:arena].with_indifferent_access)
+      render :show, locals: { arena: arena }
+    else
+      redirect_to :root, alert: "Arena not found"
+    end
   end
 
   def index
@@ -35,5 +42,9 @@ class ArenasController < ApplicationController
 
   def new_arena_params
     params.require(:arena).permit(:hero)
+  end
+
+  def update_params
+    params.require(:arena).permit(:packs, :gold, :dust, :cards, :gold_cards)
   end
 end

@@ -10,7 +10,24 @@
 <div class="medium-8 large-10 columns">
   <h2>Rewards</h2>
   <% if arena.rewarded? %>
+    <ul>
+      <li>
+        Packs: <%= arena.packs %>
+      </li>
+      <li>
+        Gold: <%= arena.gold %>
+      </li>
+      <li>
+        Dust: <%= arena.dust %>
+      </li>
+      <li>
+        Cards: <%= arena.cards %>
+      </li>
+      <li>
+        Golden cards: <%= arena.gold_cards %>
+      </li>
 
+    </ul>
   <% else %>
     <%= form_for(arena) do |f| %>
       <%= f.label :packs %>

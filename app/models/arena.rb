@@ -6,6 +6,8 @@ class Arena < ActiveRecord::Base
   MAX_WINS = 12
   MAX_LOSES = 3
 
+  attr_accessor :set_rewards
+
   def finished?
     too_much_lost? || too_much_won?
   end
@@ -15,8 +17,10 @@ class Arena < ActiveRecord::Base
   end
 
   validates_each :matches do |arena, attr, value|
-    arena.errors.add attr, "too much lost matches for the arena!" if arena.too_much_lost?
-    arena.errors.add attr, "too much won matches for the arena! hooray!" if arena.too_much_won?
+    unless arena.set_rewards
+      arena.errors.add attr, "too much lost matches for the arena!" if arena.too_much_lost?
+      arena.errors.add attr, "too much won matches for the arena! hooray!" if arena.too_much_won?
+    end
   end
 
   def too_much_lost?
@@ -25,5 +29,16 @@ class Arena < ActiveRecord::Base
 
   def too_much_won?
     matches.where(won: true).count >= MAX_WINS
+  end
+
+  def set_rewards!(reward)
+    @set_rewards = true
+    self.packs       = reward[:packs]
+    self.gold        = reward[:gold]
+    self.dust        = reward[:dust]
+    self.cards       = reward[:cards]
+    self.gold_cards  = reward[:gold_cards]
+    self.finished_at = Time.now
+    save
   end
 end
