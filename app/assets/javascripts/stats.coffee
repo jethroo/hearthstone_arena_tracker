@@ -10,6 +10,23 @@ winLoss = (data) ->
     series: data
   return
 
+overTime = (data) ->
+  $('#win_loss_over_time').highcharts
+    chart: type: 'spline'
+    title: text: 'over time (all heros)'
+    xAxis:
+      type: 'datetime'
+      dateTimeLabelFormats:
+        month: '%e. %b'
+        year: '%b'
+      title: text: 'Date'
+    yAxis:
+      title: text: 'Win / Loss'
+      min: 0
+    plotOptions: spline: marker: enabled: true
+    series: data
+  return
+
 $(document).on "page:change", ->
   if ($('#win_loss_hero').length)
     $.ajax
@@ -20,5 +37,15 @@ $(document).on "page:change", ->
       success: (data) ->
         winLoss data
         return
-    return
+  if ($('#win_loss_over_time').length)
+    $.ajax
+      url: '/stats/win_loss_over_time'
+      type: 'GET'
+      async: true
+      dataType: 'json'
+      success: (data) ->
+        overTime data
+        return
+  return
+
 
