@@ -66,6 +66,10 @@ describe Arena do
   end
 
   describe "rewarded?" do
+    before do
+      subject.hero = Hero::HEROS.first
+    end
+
     it "is determined by packs" do
       expect{ subject.packs = 1 }.to change{ subject.rewarded? }.from(false).to(true)
     end

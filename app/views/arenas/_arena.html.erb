@@ -1,0 +1,51 @@
+<div class="small-12 medium-6 large-4 columns arena_box">
+  <div class="large-12 columns">
+    <div class="round info label">
+      <%= arena_counter + 1 %>
+    </div>
+  </div>
+  <div class="large-12 columns arena_result">
+    <%= image_tag("heroes/#{arena.hero}_small_circle.png") %>
+    Wins: <%= arena.matches.select{ |x| x.won == true }.count %>
+    Loses: <%= arena.matches.select{ |x| x.won == false }.count %>
+  </div>
+  <div class="large-12 columns arena_result">
+    <%= arena.created_at %>
+  </div>
+  <div class="large-12 columns arena_result">
+    <ul class="button-group round">
+      <% if arena.finished?(arena.matches.select{ |x| x.won == true }.count, arena.matches.select{ |x| x.won == false }.count) %>
+        <li>
+          <div class="button tiny disabled">
+            Play
+          </div>
+        </li>
+        <li>
+          <% if arena.rewarded? %>
+            <%= link_to "Show reward", arena_path(arena), class: "button tiny success" %>
+          <% else %>
+            <%= link_to "Claim reward", arena_path(arena), class: "button tiny success" %>
+          <% end %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to "Play", arena_path(arena), class: "button tiny" %>
+        </li>
+        <li>
+          <div class="button tiny disabled">
+            Claim reward
+          </div>
+        </li>
+      <% end %>
+      <li>
+        <% unless arena.rewarded? %>
+          <a href="#" class="button tiny alert">Delete</a>
+        <% else %>
+          <div class="button tiny alert disabled">
+            Delete
+          </div>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</div>

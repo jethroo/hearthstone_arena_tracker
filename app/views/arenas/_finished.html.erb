@@ -29,17 +29,24 @@
 
     </ul>
   <% else %>
+    <% if arena.errors.any? %>
+      <ul>
+        <% arena.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
     <%= form_for(arena) do |f| %>
       <%= f.label :packs %>
-      <%= f.text_field :packs %>
+      <%= f.select :packs , [1,2] %>
       <%= f.label :gold %>
-      <%= f.text_field :gold %>
+      <%= f.number_field :gold, step: 5 %>
       <%= f.label :dust %>
-      <%= f.text_field :dust %>
+      <%= f.number_field :dust, step: 5 %>
       <%= f.label :cards %>
-      <%= f.text_field :cards %>
+      <%= f.number_field :cards, step: 1 %>
       <%= f.label :golden_cards %>
-      <%= f.text_field :gold_cards %>
+      <%= f.number_field :cards, step: 1 %>
       <%= f.submit "Create", class: "button" %>
     <% end %>
   <% end %>

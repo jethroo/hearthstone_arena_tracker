@@ -35,7 +35,7 @@ class ArenasController < ApplicationController
   end
 
   def index
-    render locals: { arenas: Hash[(1...current_user.arenas.size+1).zip current_user.arenas] }
+    render locals: { arenas: current_user.arenas.includes(:matches) }
   end
 
   private

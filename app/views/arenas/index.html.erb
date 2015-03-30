@@ -1,24 +1,9 @@
-<h2>Your arenas</h2>
+<div class="large-12">
+  <h2>My arenas</h2>
 
-<% if arenas.any? %>
-  <table>
-    <thead>
-      <tr>
-        <th width="100">#</th>
-        <th width="200">Hero</th>
-        <th width="100">Wins</th>
-        <th width="100">Loses</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% arenas.each do |no, arena| %>
-        <tr>
-          <td><%= no %></td>
-          <td><%= image_tag("heroes/#{ arena.hero}_small_circle.png") %><%= link_to arena.hero, arena_path(arena) %></td>
-          <td></td>
-          <td></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
+  <div class="large-12">
+    <div id="my_matches">
+      <%= render partial: "arena", collection: arenas, as: :arena %>
+    </div>
+  </div>
+</div>
