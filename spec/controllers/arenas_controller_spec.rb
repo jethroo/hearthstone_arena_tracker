@@ -113,22 +113,73 @@ describe ArenasController, type: :controller do
       end
     end
   end
+
+  describe "update" do
+    let(:valid_arena_params) do
+      {
+        packs: 1,
+        gold: 100,
+        dust: nil,
+        cards: 2,
+        gold_cards: nil
+      }
+    end
+
+    context "arena found" do
+      let(:arenas) do
+        double("arenas", where: double("dataset", first: Arena.new))
+      end
+
+      before do
+        allow(user).to receive(:arenas).and_return(arenas)
+      end
+
+      it "renders show" do
+        expect(put :update, { id: 1, arena: valid_arena_params })
+          .to render_template(:show)
+      end
+    end
+
+    context "arena not found" do
+      let(:arenas) do
+        double("arenas", where: [])
+      end
+
+      before do
+        allow(user).to receive(:arenas).and_return(arenas)
+        put :update, { id: 1, arena: valid_arena_params }
+      end
+
+      after do
+        expect(user).to have_received(:arenas)
+      end
+
+      it "redirects to root" do
+        expect(response).to be_redirect
+        expect(flash[:alert]).to eq("Arena not found")
+      end
+    end
+  end
+
+  describe "index" do
+    let(:arenas) do
+      double("arenas", where: double("dataset", first: Arena.new))
+    end
+
+    before do
+      allow(controller).to receive(:render)
+      allow(user).to receive(:arenas).and_return(arenas)
+      allow(arenas).to receive(:includes).with(:matches).and_return(arenas)
+    end
+
+    after do
+      expect(controller)
+        .to have_received(:render)
+          .with(locals: { arenas: arenas })
+    end
+
+    it "renders index" do
+      expect(get :index).to be_ok
+    end
+  end
 end
-
-=begin
-  def update
-
-  end
-
-  def index
-    render locals: { arenas: Hash[(1...current_user.arenas.size+1).zip current_user.arenas] }
-  end
-
-  private
-
-  def new_arena_params
-    params.require(:arena).permit(:hero)
-  end
-end
-
-=end

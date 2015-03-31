@@ -6,15 +6,15 @@
   </div>
   <div class="large-12 columns arena_result">
     <%= image_tag("heroes/#{arena.hero}_small_circle.png") %>
-    Wins: <%= arena.matches.select{ |x| x.won == true }.count %>
-    Loses: <%= arena.matches.select{ |x| x.won == false }.count %>
+    Wins: <%= arena.won_count %>
+    Loses: <%= arena.lost_count %>
   </div>
   <div class="large-12 columns arena_result">
     <%= arena.created_at %>
   </div>
   <div class="large-12 columns arena_result">
     <ul class="button-group round">
-      <% if arena.finished?(arena.matches.select{ |x| x.won == true }.count, arena.matches.select{ |x| x.won == false }.count) %>
+      <% if arena.finished? %>
         <li>
           <div class="button tiny disabled">
             Play
