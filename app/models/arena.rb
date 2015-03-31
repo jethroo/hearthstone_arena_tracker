@@ -1,15 +1,7 @@
 class Arena < ActiveRecord::Base
   include Hero
   belongs_to :user
-  has_many   :matches do
-    def won
-      where(won: true)
-    end
-
-    def lost
-      where(won: false)
-    end
-  end
+  has_many   :matches
 
   MAX_WINS = 12
   MAX_LOSES = 3

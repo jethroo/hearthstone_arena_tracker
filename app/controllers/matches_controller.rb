@@ -1,7 +1,11 @@
 class MatchesController < ApplicationController
   def index
-    matches = params[:arena_id] ? current_user.arenas.where(id: params[:arena_id]).first : current_user.matches.includes(:arena)
-    render locals: { matches: matches.order(created_at: :desc) }
+    render locals: {
+                      matches: current_user
+                                 .matches
+                                 .includes(:arena)
+                                 .order(created_at: :desc)
+                   }
   end
 
   def new

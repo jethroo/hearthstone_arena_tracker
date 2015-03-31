@@ -1,16 +1,9 @@
 module StatsHelper
-  def win_loss_json
+  def win_loss_data
     hero_stats_graph_array(query_hero_stats)
   end
 
-  def win_loss_over_time_json
-    loses = {
-      name: 'Loses',
-      data: [
-
-            ]
-    }
-
+  def win_loss_over_time_data
     [ over_time_data(true), over_time_data(false) ]
   end
 

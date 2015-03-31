@@ -1,15 +1,21 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the StatsHelper. For example:
-#
-# describe StatsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
-RSpec.describe StatsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe StatsHelper, type: :helper do
+  let(:user) { double("user", id: 1) }
+
+  before do
+    allow(helper).to receive(:current_user).and_return(user)
+  end
+
+  describe "#win_loss_data" do
+    it "should generate hero stats data" do
+      expect(helper.win_loss_data).to be_an(Array)
+    end
+  end
+
+  describe "#win_loss_over_time_data" do
+    it "should array with win and loss data" do
+      expect(helper.win_loss_over_time_data.size).to eq(2)
+    end
+  end
 end
