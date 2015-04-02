@@ -52,70 +52,84 @@ describe MatchesController, type: :controller do
         .to have_received(:limit).with(12)
     end
 
-
-    after do
-      expect(controller)
-       .to have_received(:render).with(locals: { matches: matches })
-    end
-
     it "renders new" do
       expect(get :new).to be_ok
     end
+  end
 
+  describe "#create" do
+    let(:valid_params) do
+      {
+        match: {
+                  hero: Hero::HEROS.first,
+                  win: true,
+                  opponent: Hero::HEROS.last,
+                  arena: 1
+               }
+      }
+    end
+
+    let(:arenas) { double("arenas") }
+    let(:arena) { Arena.new }
+
+    before do
+      allow(user).to receive(:arenas).and_return(arenas)
+      allow(arenas).to receive(:where).and_return([arena])
+    end
+
+    context "match created" do
+      before do
+        allow(arena).to receive(:valid?).and_return(true)
+      end
+
+      it "renders create template without layout" do
+        expect(post :create, valid_params).to render_template(:create)
+      end
+    end
+
+    context "match invalid" do
+      before do
+        allow(arena).to receive(:valid?).and_return(false)
+      end
+
+      it "renders error template without layout" do
+        expect(post :create, valid_params)
+          .to render_template("matches/ajax_error")
+      end
+    end
+  end
+
+  describe "#destroy" do
+    let(:matches) { double("matches") }
+    let(:match) { double("match") }
+
+    before do
+      allow(user).to receive(:matches).and_return(matches)
+    end
+
+    context "not_found" do
+      before do
+        allow(matches).to receive(:where).and_return([])
+      end
+
+      it "will respond with not_found" do
+        expect(delete :destroy, id: 1).to be_not_found
+      end
+    end
+
+    context "destroy" do
+      before do
+        allow(matches).to receive(:where).and_return([match])
+        allow(match).to receive(:destroy)
+      end
+
+      after do
+        expect(match).to have_received(:destroy)
+      end
+
+      it "will respond with ok " do
+        expect(delete :destroy, id: 1).to be_ok
+      end
+    end
   end
 end
-
-=begin
-class MatchesController < ApplicationController
-  def create
-    match = Match.new(match_params)
-    if match.save
-      render layout: false, locals: { match: match.decorate }
-    else
-      render template: "matches/ajax_error", layout: false, status: :error, locals: { match: match.decorate }
-    end
-  end
-
-  def edit
-
-  end
-
-  def show
-
-  end
-
-  def update
-  end
-
-  def destroy
-    match = current_user.matches.where(id: params[:id]).first
-    if match
-      match.destroy
-      head :ok, content_type: "text/html"
-    else
-      head :not_found, content_type: "text/html"
-    end
-  end
-
-  private
-
-  def match_params
-    params.require(:match).permit(:hero, :win, :opponent, :arena)
-    match_hash(params[:match])
-  end
-
-  def match_hash(match)
-    match_hash = {
-                    user_id: current_user.id,
-                    hero: match[:hero],
-                    opponent: "opponent_#{match[:opponent]}",
-                    won: match[:win]
-                 }
-    if match[:arena] && match[:arena].present? && current_user.arenas.exists?(match[:arena])
-      match_hash.merge!(arena_id: match[:arena])
-    end
-
-    match_hash
-  end
-end
-=end

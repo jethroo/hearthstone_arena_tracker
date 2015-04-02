@@ -14,7 +14,7 @@ describe StatsHelper, type: :helper do
   end
 
   describe "#win_loss_over_time_data" do
-    it "should array with win and loss data" do
+    it "should generate win and loss data" do
       expect(helper.win_loss_over_time_data.size).to eq(2)
     end
   end

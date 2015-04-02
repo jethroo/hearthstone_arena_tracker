@@ -9,15 +9,22 @@ class MatchesController < ApplicationController
   end
 
   def new
-    render locals: { matches: current_user.matches.order(created_at: :desc).limit(12) }
+    render locals: {
+                      matches: current_user
+                                .matches
+                                .order(created_at: :desc)
+                                .limit(12)
+                   }
   end
 
   def create
     match = Match.new(match_params)
+
     if match.save
       render layout: false, locals: { match: match.decorate }
     else
-      render template: "matches/ajax_error", layout: false, status: :error, locals: { match: match.decorate }
+      render template: "matches/ajax_error", layout: false, status: :error,
+        locals: { match: match.decorate }
     end
   end
 
@@ -56,10 +63,18 @@ class MatchesController < ApplicationController
                     opponent: "opponent_#{match[:opponent]}",
                     won: match[:win]
                  }
-    if match[:arena] && match[:arena].present? && current_user.arenas.exists?(match[:arena])
-      match_hash.merge!(arena_id: match[:arena])
+    if match_arena(match[:arena])
+      match_hash.merge!(arena: match_arena(match[:arena]))
     end
 
     match_hash
+  end
+
+  def match_arena(arena_param)
+    if arena_param.present?
+      current_user
+        .arenas
+        .where(arena_id: arena_param).first
+    end
   end
 end
