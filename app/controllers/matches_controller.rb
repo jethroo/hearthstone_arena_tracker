@@ -74,7 +74,7 @@ class MatchesController < ApplicationController
     if arena_param.present?
       current_user
         .arenas
-        .where(arena_id: arena_param).first
+        .where(id: arena_param).first
     end
   end
 end

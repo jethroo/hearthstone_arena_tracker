@@ -1,4 +1,5 @@
 class MatchDecorator < Draper::Decorator
+  include GlobalConstants
   delegate_all
 
   def opponent
@@ -6,6 +7,6 @@ class MatchDecorator < Draper::Decorator
   end
 
   def created_at
-    object.created_at.strftime("%d.%m.%Y %H:%M")
+    object.created_at.strftime(STRFTIME_FORMAT)
   end
 end

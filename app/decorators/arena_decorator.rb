@@ -1,4 +1,5 @@
 class ArenaDecorator < Draper::Decorator
+  include GlobalConstants
   delegate_all
 
   def won_count
@@ -6,7 +7,7 @@ class ArenaDecorator < Draper::Decorator
   end
 
   def lost_count
-    object.matches.select{ |x| x.won == true }.count
+    object.matches.select{ |x| x.won == false }.count
   end
 
   def finished?
@@ -14,6 +15,6 @@ class ArenaDecorator < Draper::Decorator
   end
 
   def created_at
-    object.created_at.strftime("%d.%m.%Y %H:%M")
+    object.created_at.strftime(STRFTIME_FORMAT)
   end
 end

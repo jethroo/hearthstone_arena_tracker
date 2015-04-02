@@ -11,7 +11,7 @@ module Hero
           :thrall,
           :uther,
           :valeera
-        ]
+        ].freeze
 
   included do
     enum hero: HEROS
