@@ -31,7 +31,7 @@ arenaWinLoss = (data) ->
   $('#arena_win_loss_by_class').highcharts
     chart:
       polar: true
-      type: 'line'
+      type: 'area'
     title:
       text: 'Arena win vs loss'
     pane: size: '90%'
