@@ -15,4 +15,10 @@ class StatsController < ApplicationController
       format.json { render json: win_loss_over_time_data }
     end
   end
+
+  def arena_win_loss_by_class
+    respond_to do |format|
+      format.json { render json: arena_win_loss_by_class_data }
+    end
+  end
 end

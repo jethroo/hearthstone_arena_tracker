@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   get "stats"                     => "stats#overview"
   get "stats/win_loss"            => "stats#win_loss", defaults: { format: :json }
   get "stats/win_loss_over_time"  => "stats#win_loss_over_time", defaults: { format: :json }
+  get "stats/arena_win_loss_by_class"  => "stats#arena_win_loss_by_class", defaults: { format: :json }
 end

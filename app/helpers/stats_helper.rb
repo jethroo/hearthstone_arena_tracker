@@ -7,7 +7,38 @@ module StatsHelper
     [ over_time_data(true), over_time_data(false) ]
   end
 
+  def arena_win_loss_by_class_data
+    arena_win_loss_by_class_array(query_hero_stats(true))
+  end
+
   private
+
+  def arena_win_loss_by_class_array(matches)
+    wins = []
+    losses = []
+    Hero::HEROS.each do | hero |
+      hero_result = matches.detect{ |m| m.hero == hero.to_s }
+      if hero_result
+        wins << hero_result.wins
+        losses << hero_result.losses
+      else
+        wins << 0
+        losses << 0
+      end
+    end
+    result = [
+      {
+        name: 'Win',
+        data: wins,
+        pointPlacement: 'on'
+      },
+      {
+        name: 'Losses',
+        data: losses,
+        pointPlacement: 'on'
+      }
+    ]
+  end
 
   def hero_stats_graph_array(matches)
     result = []
@@ -18,7 +49,7 @@ module StatsHelper
                     name: hero.to_s,
                     data: [
                             hero_result.wins,
-                            hero_result.loses
+                            hero_result.losses
                           ]
                   }
       end
@@ -26,13 +57,14 @@ module StatsHelper
     result
   end
 
-  def query_hero_stats
+  def query_hero_stats(arena_only=false)
     query = <<-SQL
       SELECT `matches`.`hero`,
         COUNT( IF(`matches`.`won` = 1, 1, NULL) ) AS wins,
-        COUNT( IF(`matches`.`won` = 0, 1, NULL) ) AS loses
+        COUNT( IF(`matches`.`won` = 0, 1, NULL) ) AS losses
         FROM `matches`
         WHERE `matches`.`user_id` = ?
+        #{"AND `matches`.`arena_id` IS NOT NULL" if arena_only}
         GROUP BY `matches`.`hero`
       SQL
 
