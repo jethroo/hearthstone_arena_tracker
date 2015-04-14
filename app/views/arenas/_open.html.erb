@@ -22,6 +22,18 @@
   </div>
 </div>
 
+<div>
+  <%= hidden_field_tag 'open_wins', arena.open_wins %>
+  <%= hidden_field_tag 'open_losses', arena.open_losses %>
+</div>
+
+<div id="arenaFinishedModal" class="reveal-modal" data-reveal>
+  <a class="close-reveal-modal">&#215;</a>
+  <h2>Arena finished</h2>
+  Awesome, go and claim your arena rewards.
+  <p><%= link_to "Claim your reward!", arena_path(arena) %></p>
+</div>
+
 <div class="large-12">
   <hr>
   <h2>Your arena matches</h2>

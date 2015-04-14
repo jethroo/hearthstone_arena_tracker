@@ -12,8 +12,6 @@ class Arena < ActiveRecord::Base
     too_much_lost?(lost) || too_much_won?(lost)
   end
 
-
-
   def rewarded?
     @set_rewards = true
     packs.present? && valid?
@@ -34,6 +32,14 @@ class Arena < ActiveRecord::Base
 
   def too_much_won?(won=nil)
     (won || matches.where(won: true).count) >= MAX_WINS
+  end
+
+  def open_wins
+    MAX_WINS - matches.where(won: true).count
+  end
+
+  def open_losses
+    MAX_LOSES - matches.where(won: false).count
   end
 
   def set_rewards!(reward)

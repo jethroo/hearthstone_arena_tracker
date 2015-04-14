@@ -170,6 +170,7 @@ describe ArenasController, type: :controller do
       allow(controller).to receive(:render)
       allow(user).to receive(:arenas).and_return(arenas)
       allow(arenas).to receive(:includes).with(:matches).and_return(arenas)
+      allow(arenas).to receive(:order).and_return(arenas)
     end
 
     after do
