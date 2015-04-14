@@ -14,12 +14,13 @@ $(document).on "page:change", ->
         success: (data) ->
           match = $(data)
           match.prependTo("#my_matches")
+
           matchtype = match.attr("class").split(/\s+/).pop()
           if matchtype == "win"
             reduceMatchCounter("#open_wins") if $("#arena")
           else if matchtype == "loose"
             reduceMatchCounter("#open_losses") if $("#arena")
-
+          arenaFinished() if $("#arena")
         error: (data) ->
           $("#flash_errors").append(data.responseText)
           window.setTimeout (->
@@ -53,3 +54,7 @@ increaseMatchCounter = (selector) ->
   counter = $(selector)
   count = parseInt(counter.attr("value"))
   counter.val(count + 1) if selector == "#open_wins" && count < 12 or selector == "#open_losses" && count < 3
+
+arenaFinished = ->
+  if parseInt($("#open_wins").attr("value")) < 1 or parseInt($("#open_losses").attr("value")) < 1
+    $('#arenaFinishedModal').foundation('reveal','open');

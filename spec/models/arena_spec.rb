@@ -170,4 +170,44 @@ describe Arena do
       end
     end
   end
+
+  describe "open_wins" do
+    context "with 5 won matches" do
+      let(:matches) { double("matches", count: 5) }
+
+      before do
+        allow(matches).to receive(:where).with(won: true).and_return(matches)
+        allow(subject).to receive(:matches).and_return(matches)
+      end
+
+      after do
+        expect(matches).to have_received(:where).with(won: true)
+        expect(subject).to have_received(:matches)
+      end
+
+      it "returns left to win matches" do
+        expect(subject.open_wins).to eq(described_class::MAX_WINS - 5)
+      end
+    end
+  end
+
+   describe "open_losses" do
+    context "with 2 lost matches" do
+      let(:matches) { double("matches", count: 2) }
+
+      before do
+        allow(matches).to receive(:where).with(won: false).and_return(matches)
+        allow(subject).to receive(:matches).and_return(matches)
+      end
+
+      after do
+        expect(matches).to have_received(:where).with(won: false)
+        expect(subject).to have_received(:matches)
+      end
+
+      it "returns left to loose matches" do
+        expect(subject.open_losses).to eq(described_class::MAX_LOSES - 2)
+      end
+    end
+  end
 end

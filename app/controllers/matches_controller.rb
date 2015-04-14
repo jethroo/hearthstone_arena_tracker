@@ -21,11 +21,7 @@ class MatchesController < ApplicationController
     match = Match.new(match_params)
 
     if match.save
-      locals = { match: match.decorate }
-      if match_arena(match[:arena])
-        match_hash.merge!(arena: match_arena(match[:arena]))
-      end
-      render layout: false, locals: locals
+      render layout: false, locals: { match: match.decorate }
     else
       render template: "matches/ajax_error", layout: false, status: :error,
         locals: { match: match.decorate }
