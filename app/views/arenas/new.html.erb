@@ -16,19 +16,3 @@
   <%= f.select :hero , Arena::HEROS, include_blank: true %>
   <%= f.submit "Create", class: "button" %>
 <% end %>
-
-<script>
-  $(function(){
-    var hero_box = $("#new_arena #arena_hero")
-
-    hero_box.change(function () {
-      var hero = ($('#arena_hero').val() === "") ? "none" : $('#arena_hero').val()
-      var img_url = "<%= root_url %>" + "assets/heroes/" + hero + ".png"
-
-      $(".hero-frame img").attr("src", img_url);
-    });
-
-    hero_box.trigger('change');
-  });
-</script>
-

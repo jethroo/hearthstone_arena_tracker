@@ -26,3 +26,11 @@ $(function() {
 $(function(){
   window.setTimeout(function() {$(".alert-box a.close").trigger("click.fndtn.alert") }, 2000);
 });
+
+function HeroImageUrl () {
+  HeroImageUrl.url_hash = {
+    anduin:     "<%= image_path('heroes/anduin.png') %>"
+  };
+};
+
+new HeroImageUrl
