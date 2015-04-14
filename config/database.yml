@@ -22,4 +22,7 @@ test: &test
   reconnect: true
 
 production:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  database: hearthstone_arena_tracker
+  pool: 5
