@@ -59,13 +59,13 @@ module StatsHelper
 
   def query_hero_stats(arena_only=false)
     query = <<-SQL
-      SELECT `matches`.`hero`,
-        COUNT( IF(`matches`.`won` = 1, 1, NULL) ) AS wins,
-        COUNT( IF(`matches`.`won` = 0, 1, NULL) ) AS losses
-        FROM `matches`
-        WHERE `matches`.`user_id` = ?
-        #{"AND `matches`.`arena_id` IS NOT NULL" if arena_only}
-        GROUP BY `matches`.`hero`
+      SELECT matches.hero,
+        COUNT( CASE WHEN matches.won IS TRUE THEN 1 ELSE NULL END) AS wins,
+        COUNT( CASE WHEN matches.won IS FALSE THEN 1 ELSE NULL END) AS losses
+        FROM matches
+        WHERE matches.user_id = ?
+        #{"AND matches.arena_id IS NOT NULL" if arena_only}
+        GROUP BY matches.hero
       SQL
 
     Match.find_by_sql([query, current_user.id])
@@ -86,12 +86,11 @@ module StatsHelper
   def over_time(wins = true)
     query = <<-SQL
       SELECT DATE(created_at) AS day, COUNT(*) AS wins
-        FROM `matches`
-        WHERE `matches`.`user_id` = ?
-        AND `matches`.`won` IS #{ wins ? TRUE : FALSE}
+        FROM matches
+        WHERE matches.user_id = ?
+        AND matches.won IS #{ wins ? TRUE : FALSE}
         GROUP BY day
       SQL
-
     Match.find_by_sql([query, current_user.id])
   end
 end
