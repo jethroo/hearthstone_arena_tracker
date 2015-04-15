@@ -1,28 +1,21 @@
 default: &default
-  adapter: mysql2
-  database: hearthstone_arena_tracker
-  username: root
-  password:
-  pool: 5
-  timeout: 5000
-  max_connections: 5
-  reconnect: true
-
-development:
-  <<: *default
-
-test: &test
-  adapter: mysql2
-  database: hearthstone_arena_tracker_test
-  username: root
-  password:
-  pool: 5
-  timeout: 5000
-  max_connections: 5
-  reconnect: true
-
-production:
   adapter: postgresql
   encoding: unicode
   database: hearthstone_arena_tracker
   pool: 5
+
+development:
+  <<: *default
+  host: localhost
+  username: hat_demo
+  password: hat_demo
+
+test:
+  <<: *default
+  host: localhost
+  database: hearthstone_arena_tracker_test
+  username: hat_demo_test
+  password: hat_demo_test
+
+production:
+  <<: *default
