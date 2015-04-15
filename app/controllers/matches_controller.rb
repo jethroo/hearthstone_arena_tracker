@@ -1,20 +1,20 @@
 class MatchesController < ApplicationController
   def index
     render locals: {
-                      matches: current_user
-                                 .matches
-                                 .includes(:arena)
-                                 .order(created_at: :desc)
-                   }
+      matches: current_user
+        .matches
+        .includes(:arena)
+        .order(created_at: :desc)
+    }
   end
 
   def new
     render locals: {
-                      matches: current_user
-                                .matches
-                                .order(created_at: :desc)
-                                .limit(12)
-                   }
+      matches: current_user
+        .matches
+        .order(created_at: :desc)
+        .limit(12)
+    }
   end
 
   def create
@@ -23,17 +23,15 @@ class MatchesController < ApplicationController
     if match.save
       render layout: false, locals: { match: match.decorate }
     else
-      render template: "matches/ajax_error", layout: false, status: :error,
-        locals: { match: match.decorate }
+      render template: 'matches/ajax_error', layout: false, status: :error,
+             locals: { match: match.decorate }
     end
   end
 
   def edit
-
   end
 
   def show
-
   end
 
   def update
@@ -43,9 +41,9 @@ class MatchesController < ApplicationController
     match = current_user.matches.where(id: params[:id]).first
     if match
       match.destroy
-      head :ok, content_type: "text/html"
+      head :ok, content_type: 'text/html'
     else
-      head :not_found, content_type: "text/html"
+      head :not_found, content_type: 'text/html'
     end
   end
 
@@ -58,11 +56,11 @@ class MatchesController < ApplicationController
 
   def match_hash(match)
     match_hash = {
-                    user_id: current_user.id,
-                    hero: match[:hero],
-                    opponent: "opponent_#{match[:opponent]}",
-                    won: match[:win]
-                 }
+      user_id: current_user.id,
+      hero: match[:hero],
+      opponent: "opponent_#{match[:opponent]}",
+      won: match[:win]
+    }
     if match_arena(match[:arena])
       match_hash.merge!(arena: match_arena(match[:arena]))
     end

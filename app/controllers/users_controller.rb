@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       log_in user
       redirect_to :root
     else
-      flash[:alert] = "Whoops"
+      flash[:alert] = 'Whoops'
       render :new, locals: { user: user }
     end
   end

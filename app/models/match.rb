@@ -7,6 +7,6 @@ class Match < ActiveRecord::Base
   belongs_to :arena
 
   enum opponent: OPPONENTS
-  validates :opponent, inclusion: { in: OPPONENTS.map{ |hero| hero.to_s } }
-  validates_associated :arena, message: "The number of won / lost matches for this arena is exceeded!"
+  validates :opponent, inclusion: { in: OPPONENTS.map(&:to_s) }
+  validates_associated :arena, message: 'The number of won / lost matches for this arena is exceeded!'
 end

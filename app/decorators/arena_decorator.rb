@@ -3,11 +3,11 @@ class ArenaDecorator < Draper::Decorator
   delegate_all
 
   def won_count
-    object.matches.select{ |x| x.won == true }.count
+    object.matches.select { |x| x.won == true }.count
   end
 
   def lost_count
-    object.matches.select{ |x| x.won == false }.count
+    object.matches.select { |x| x.won == false }.count
   end
 
   def finished?

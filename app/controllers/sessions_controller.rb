@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       log_in user
       flash[:success] = "Welcome back #{user.name}!"
     else
-      flash[:alert] = "The credentials you provided seem to be incorrect!"
+      flash[:alert] = 'The credentials you provided seem to be incorrect!'
     end
 
     redirect_to :root

@@ -6,10 +6,10 @@ class ArenasController < ApplicationController
   def create
     arena = Arena.create(new_arena_params.merge(user_id: current_user.id))
     if arena.persisted?
-      flash[:success] = "Successfully created new Arena"
-      render :show, locals: { arena: arena}
+      flash[:success] = 'Successfully created new Arena'
+      render :show, locals: { arena: arena }
     else
-      flash[:alert] = "Something went wrong, please correct the errors first!"
+      flash[:alert] = 'Something went wrong, please correct the errors first!'
       render :new, locals: { arena: arena }
     end
   end
@@ -19,7 +19,7 @@ class ArenasController < ApplicationController
     if arena
       render locals: { arena: arena }
     else
-      redirect_to :root, alert: "Arena not found"
+      redirect_to :root, alert: 'Arena not found'
     end
   end
 
@@ -30,15 +30,15 @@ class ArenasController < ApplicationController
       arena.set_rewards!(params[:arena].with_indifferent_access)
       render :show, locals: { arena: arena }
     else
-      redirect_to :root, alert: "Arena not found"
+      redirect_to :root, alert: 'Arena not found'
     end
   end
 
   def index
     render locals: { arenas: current_user
-                               .arenas
-                               .includes(:matches)
-                               .order(created_at: :desc)
+      .arenas
+      .includes(:matches)
+      .order(created_at: :desc)
                    }
   end
 

@@ -1,14 +1,14 @@
 class Arena < ActiveRecord::Base
   include Hero
   belongs_to :user
-  has_many   :matches
+  has_many :matches
 
   MAX_WINS = 12
   MAX_LOSES = 3
 
   attr_accessor :set_rewards
 
-  def finished?(won=nil,lost=nil)
+  def finished?(_won = nil, lost = nil)
     too_much_lost?(lost) || too_much_won?(lost)
   end
 
@@ -19,18 +19,18 @@ class Arena < ActiveRecord::Base
 
   validates_numericality_of [:packs, :gold, :dust, :cards, :gold_cards], allow_nil: true
 
-  validates_each :matches do |arena, attr, value|
+  validates_each :matches do |arena, attr, _value|
     unless arena.set_rewards
-      arena.errors.add attr, "too much lost matches for the arena!" if arena.too_much_lost?
-      arena.errors.add attr, "too much won matches for the arena! hooray!" if arena.too_much_won?
+      arena.errors.add attr, 'too much lost matches for the arena!' if arena.too_much_lost?
+      arena.errors.add attr, 'too much won matches for the arena! hooray!' if arena.too_much_won?
     end
   end
 
-  def too_much_lost?(lost=nil)
+  def too_much_lost?(lost = nil)
     (lost || matches.where(won: false).count) >= MAX_LOSES
   end
 
-  def too_much_won?(won=nil)
+  def too_much_won?(won = nil)
     (won || matches.where(won: true).count) >= MAX_WINS
   end
 

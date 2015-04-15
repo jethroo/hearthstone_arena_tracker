@@ -3,7 +3,7 @@ class MatchDecorator < Draper::Decorator
   delegate_all
 
   def opponent
-    object.opponent.gsub("opponent_","")
+    object.opponent.gsub('opponent_', '')
   end
 
   def created_at
