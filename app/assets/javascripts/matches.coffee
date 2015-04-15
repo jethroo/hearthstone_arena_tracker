@@ -43,7 +43,7 @@ $(document).on "page:change", ->
   $("#hero").change (e) ->
     selected = $(this).val()
     hero = if selected == "" then "none" else selected
-    $(".hero-frame img").attr("src", "/assets/heroes/"+hero+".png")
+    $(".hero-frame img").attr("src", HeroImageUrl.url_hash[hero])
   $("#hero").trigger("change")
 
 reduceMatchCounter = (selector) ->

@@ -38,6 +38,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem "highcharts-rails", "~> 3.0.0"
 
+gem "rubocop", require: false
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
