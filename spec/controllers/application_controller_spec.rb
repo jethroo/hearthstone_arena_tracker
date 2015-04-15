@@ -7,7 +7,8 @@ describe ApplicationController, type: :controller do
 
       before do
         allow(controller).to receive(:logged_in?).and_return(false)
-        allow(controller).to receive(:redirect_to).with(:root).and_return(response)
+        allow(controller).to receive(:redirect_to)
+          .with(:root).and_return(response)
         allow(controller).to receive(:flash).and_return(alert: '')
       end
 

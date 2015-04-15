@@ -69,10 +69,7 @@ class MatchesController < ApplicationController
   end
 
   def match_arena(arena_param)
-    if arena_param.present?
-      current_user
-        .arenas
-        .where(id: arena_param).first
-    end
+    return nil unless arena_param.present?
+    current_user.arenas.where(id: arena_param).first
   end
 end

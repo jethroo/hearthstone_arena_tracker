@@ -18,25 +18,16 @@ module StatsHelper
     losses = []
     Hero::HEROS.each do |hero|
       hero_result = matches.detect { |m| m.hero == hero.to_s }
-      if hero_result
-        wins << hero_result.wins
-        losses << hero_result.losses
-      else
-        wins << 0
-        losses << 0
-      end
+      wins   << (hero_result ? hero_result.wins   : 0)
+      losses << (hero_result ? hero_result.losses : 0)
     end
-    result = [
-      {
-        name: 'Win',
-        data: wins,
-        pointPlacement: 'on'
-      },
-      {
-        name: 'Losses',
-        data: losses,
-        pointPlacement: 'on'
-      }
+    arena_win_loss_by_class_result(wins, losses)
+  end
+
+  def arena_win_loss_by_class_result(wins, losses)
+    [
+      { name: 'Win', data: wins, pointPlacement: 'on' },
+      { name: 'Losses', data: losses, pointPlacement: 'on' }
     ]
   end
 
@@ -44,15 +35,11 @@ module StatsHelper
     result = []
     Hero::HEROS.each do |hero|
       hero_result = matches.detect { |m| m.hero == hero.to_s }
-      if hero_result
-        result << {
-          name: hero.to_s,
-          data: [
-            hero_result.wins,
-            hero_result.losses
-          ]
-        }
-      end
+      next unless hero_result
+      result << {
+        name: hero.to_s,
+        data: [hero_result.wins, hero_result.losses]
+      }
     end
     result
   end

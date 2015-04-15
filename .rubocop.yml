@@ -7,5 +7,6 @@ AllCops:
     - '**/config.ru'
   Exclude:
     - 'db/**/*'
+    - 'bin/**/*'
     - 'config/**/*'
     - 'script/**/*'

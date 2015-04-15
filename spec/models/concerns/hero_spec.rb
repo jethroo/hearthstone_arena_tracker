@@ -23,12 +23,14 @@ describe Hero do
 
     before do
       allow(HeroDummy).to receive(:enum).with(hero: Hero::HEROS)
-      allow(HeroDummy).to receive(:validates).with(:hero, inclusion: { in: Hero::HEROS.map(&:to_s) })
+      allow(HeroDummy).to receive(:validates)
+        .with(:hero, inclusion: { in: Hero::HEROS.map(&:to_s) })
     end
 
     after do
       expect(HeroDummy).to have_received(:enum).with(hero: Hero::HEROS)
-      expect(HeroDummy).to have_received(:validates).with(:hero, inclusion: { in: Hero::HEROS.map(&:to_s) })
+      expect(HeroDummy).to have_received(:validates)
+        .with(:hero, inclusion: { in: Hero::HEROS.map(&:to_s) })
     end
 
     it 'should call enum and validates' do

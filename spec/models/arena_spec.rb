@@ -71,7 +71,8 @@ describe Arena do
     end
 
     it 'is determined by packs' do
-      expect { subject.packs = 1 }.to change { subject.rewarded? }.from(false).to(true)
+      expect { subject.packs = 1 }.to change { subject.rewarded? }
+        .from(false).to(true)
     end
   end
 

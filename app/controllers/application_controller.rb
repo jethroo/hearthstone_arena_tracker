@@ -6,9 +6,8 @@ class ApplicationController < ActionController::Base
   before_action :require_login
 
   def require_login
-    unless logged_in?
-      flash[:alert] = 'You must be logged in to access this section'
-      redirect_to :root
-    end
+    return nil if logged_in?
+    flash[:alert] = 'You must be logged in to access this section'
+    redirect_to :root
   end
 end

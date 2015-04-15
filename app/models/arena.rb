@@ -17,12 +17,21 @@ class Arena < ActiveRecord::Base
     packs.present? && valid?
   end
 
-  validates_numericality_of [:packs, :gold, :dust, :cards, :gold_cards], allow_nil: true
+  validates_numericality_of(
+    [:packs, :gold, :dust, :cards, :gold_cards],
+    allow_nil: true
+  )
 
   validates_each :matches do |arena, attr, _value|
     unless arena.set_rewards
-      arena.errors.add attr, 'too much lost matches for the arena!' if arena.too_much_lost?
-      arena.errors.add attr, 'too much won matches for the arena! hooray!' if arena.too_much_won?
+      arena.errors.add(
+        attr,
+        'too much lost matches for the arena!'
+      ) if arena.too_much_lost?
+      arena.errors.add(
+        attr,
+        'too much won matches for the arena! hooray!'
+      ) if arena.too_much_won?
     end
   end
 
@@ -42,7 +51,7 @@ class Arena < ActiveRecord::Base
     MAX_LOSES - matches.where(won: false).count
   end
 
-  def set_rewards!(reward)
+  def rewards!(reward)
     @set_rewards = true
     self.packs       = reward[:packs]
     self.gold        = reward[:gold]

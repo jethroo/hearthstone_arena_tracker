@@ -66,7 +66,8 @@ describe ArenaDecorator do
     end
 
     after do
-      expect(created_at).to have_received(:strftime).with(described_class::STRFTIME_FORMAT)
+      expect(created_at).to have_received(:strftime)
+        .with(described_class::STRFTIME_FORMAT)
     end
 
     it 'formats created_at' do

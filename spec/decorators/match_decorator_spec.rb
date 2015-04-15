@@ -2,7 +2,11 @@ require 'spec_helper'
 
 describe MatchDecorator do
   let(:created_at) { double('time') }
-  let(:match) { double('match', opponent: 'opponent_test', created_at: created_at) }
+
+  let(:match) do
+    double('match', opponent: 'opponent_test', created_at: created_at)
+  end
+
   subject { described_class.new(match) }
 
   describe '#opponent' do
@@ -17,7 +21,8 @@ describe MatchDecorator do
     end
 
     after do
-      expect(created_at).to have_received(:strftime).with(described_class::STRFTIME_FORMAT)
+      expect(created_at).to have_received(:strftime)
+        .with(described_class::STRFTIME_FORMAT)
     end
 
     it 'formats created_at' do
