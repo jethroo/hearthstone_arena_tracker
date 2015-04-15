@@ -6,5 +6,5 @@ $(document).on "page:change", ->
   $('#new_arena #arena_hero').change ->
     selected = $(this).val()
     hero = if selected == "" then "none" else selected
-    $(".hero-frame img").attr("src", hero)
+    $(".hero-frame img").attr("src", HeroImageUrl.url_hash[hero])
   $('#new_arena #arena_hero').trigger("change")
