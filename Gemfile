@@ -63,6 +63,8 @@ group :development, :test do
 
   gem 'shoulda-matchers', require: false
   gem 'simplecov', require: false
+  gem 'capybara'
+  gem 'selenium-webdriver'
 end
 
 ruby '2.2.0'

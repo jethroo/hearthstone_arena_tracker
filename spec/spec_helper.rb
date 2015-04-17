@@ -1,5 +1,6 @@
 require 'support/utilities'
 require 'simplecov'
+require 'capybara/rspec'
 
 SimpleCov.start
 

@@ -3,7 +3,6 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(name: params[:session][:name])
-
     if authentication_successful?(user)
       log_in user
       flash[:success] = "Welcome back #{user.name}!"
