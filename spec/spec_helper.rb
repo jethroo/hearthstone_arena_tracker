@@ -1,6 +1,7 @@
 require 'support/utilities'
 require 'simplecov'
 require 'capybara/rspec'
+require 'features_helper'
 
 SimpleCov.start
 
@@ -16,4 +17,6 @@ RSpec.configure do |config|
   config.order = :random
 
   Kernel.srand config.seed
+
+  config.include FeaturesHelper, type: :feature
 end

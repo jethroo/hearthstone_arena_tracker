@@ -87,7 +87,7 @@
                 </li>
 
                 <li class="alert">
-                  <a href="<%= logout_path %>" data-method="delete" rel="nofollow">
+                  <a id="logoutLink" href="<%= logout_path %>" data-method="delete" rel="nofollow">
                     <span class="fi-x-circle">
                       Logout
                     </span>
@@ -95,7 +95,7 @@
                 </li>
               <% else %>
                 <li class="active">
-                  <a id="loginModelLink" href="#" data-reveal-id="loginModal">
+                  <a id="loginModalLink" href="#" data-reveal-id="loginModal">
                     <span class="fi-unlock">
                       Login
                     </span>
