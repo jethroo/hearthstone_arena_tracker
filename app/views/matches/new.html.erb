@@ -10,10 +10,10 @@
   <h2>Add a match with one click!</h2>
   <div id="new_matches" data-action-url="<%= matches_path %>">
   </div>
-  <div class="small-block-grid-3 medium-block-grid-6 large-block-grid-9">
+  <div id="newMatchGrid" class="small-block-grid-3 medium-block-grid-6 large-block-grid-9">
     <% %w(win loose).each do |result| %>
      <% Arena::HEROS.each do |hero| %>
-        <li class="match_<%= result %>">
+        <li id="<%= result %>_vs_<%= hero %>" class="match_<%= result %>">
           <%= link_to image_tag("heroes/#{hero}_small_circle.png"),"#", value: "#{hero}" %>
         </li>
       <% end %>

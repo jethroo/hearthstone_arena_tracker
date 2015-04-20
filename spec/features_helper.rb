@@ -19,3 +19,14 @@ module FeaturesHelper
     expect(page).to have_content 'You have been logged out.'
   end
 end
+
+module Capybara
+  module Node
+    class Element
+      def hover
+        @session.driver.browser.action.move_to(self.native).perform
+        self
+      end
+    end
+  end
+end
