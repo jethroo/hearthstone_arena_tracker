@@ -11,5 +11,6 @@ describe "create a match process", :type => :feature do
         find("##{result}_vs_#{hero} a").click
       end
     end
+    expect(page).to have_css(".match_result", count: 18)
   end
 end
