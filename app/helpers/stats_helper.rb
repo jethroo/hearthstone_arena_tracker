@@ -77,6 +77,7 @@ module StatsHelper
         WHERE matches.user_id = ?
         AND matches.won IS #{ wins ? TRUE : FALSE}
         GROUP BY day
+        ORDER BY day ASC
       SQL
     Match.find_by_sql([query, current_user.id])
   end
