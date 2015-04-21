@@ -1,11 +1,11 @@
 module FeaturesHelper
   def signed_in_user
-    user = User.create(name: 'user@example.com', password: 'password', password_confirmation: 'password')
+    user = dummy_user
     visit '/'
     find('#loginModalLink').click
-    within("#loginModal") do
-      fill_in 'Name', :with => 'user@example.com'
-      fill_in 'Password', :with => 'password'
+    within('#loginModal') do
+      fill_in 'Name', with: user.name
+      fill_in 'Password', with: user.password
     end
     click_button 'Log in'
     expect(page).to have_content 'Welcome back user@example.com!'
@@ -18,13 +18,23 @@ module FeaturesHelper
     find('#logoutLink').click
     expect(page).to have_content 'You have been logged out.'
   end
+
+  private
+
+  def dummy_user
+    User.create(
+      name: 'user@example.com',
+      password: 'password',
+      password_confirmation: 'password'
+    )
+  end
 end
 
 module Capybara
   module Node
     class Element
       def hover
-        @session.driver.browser.action.move_to(self.native).perform
+        @session.driver.browser.action.move_to(native).perform
         self
       end
     end
