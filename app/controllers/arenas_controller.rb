@@ -27,7 +27,7 @@ class ArenasController < ApplicationController
     update_params
     arena = current_user.arenas.where(id: params[:id]).first
     if arena
-      arena.rewards!(params[:arena].with_indifferent_access)
+      arena.rewards(params[:arena].with_indifferent_access)
       render :show, locals: { arena: arena }
     else
       redirect_to :root, alert: 'Arena not found'

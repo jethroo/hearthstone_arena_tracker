@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe ArenaDecorator do
   let(:match) { double('match') }
@@ -39,21 +39,13 @@ describe ArenaDecorator do
   end
 
   describe '#finished?' do
-    let(:won_count) { double('won_count') }
-    let(:lost_count) { double('lost_count') }
-
     before do
-      allow(subject).to receive(:won_count).and_return(won_count)
-      allow(subject).to receive(:lost_count).and_return(lost_count)
-      allow(arena).to receive(:finished?).and_return(false)
-    end
-
-    after do
-      expect(arena).to have_received(:finished?).with(won_count, lost_count)
+      allow(subject).to receive(:won_count).and_return(5)
+      allow(subject).to receive(:lost_count).and_return(3)
     end
 
     it 'calls arena finished with known matchresults' do
-      expect(subject.finished?).to be_falsey
+      expect(subject.finished?).to be_truthy
     end
   end
 

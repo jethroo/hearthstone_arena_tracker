@@ -11,7 +11,8 @@ class ArenaDecorator < Draper::Decorator
   end
 
   def finished?
-    object.finished?(won_count, lost_count)
+    won_count >= Arena::MAX_WINS ||
+      lost_count >= Arena::MAX_LOSES
   end
 
   def created_at

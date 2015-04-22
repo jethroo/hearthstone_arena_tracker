@@ -8,8 +8,9 @@ class Arena < ActiveRecord::Base
 
   attr_accessor :set_rewards
 
-  def finished?(_won = nil, lost = nil)
-    too_much_lost?(lost) || too_much_won?(lost)
+  def finished?
+    matches.where(won: true).count  >= MAX_WINS ||
+      matches.where(won: false).count >= MAX_LOSES
   end
 
   def rewarded?
@@ -25,21 +26,9 @@ class Arena < ActiveRecord::Base
     unless arena.set_rewards
       arena.errors.add(
         attr,
-        'too much lost matches for the arena!'
-      ) if arena.too_much_lost?
-      arena.errors.add(
-        attr,
-        'too much won matches for the arena! hooray!'
-      ) if arena.too_much_won?
+        'arena is finished'
+      ) if arena.finished?
     end
-  end
-
-  def too_much_lost?(lost = nil)
-    (lost || matches.where(won: false).count) >= MAX_LOSES
-  end
-
-  def too_much_won?(won = nil)
-    (won || matches.where(won: true).count) >= MAX_WINS
   end
 
   def open_wins
@@ -50,7 +39,7 @@ class Arena < ActiveRecord::Base
     MAX_LOSES - matches.where(won: false).count
   end
 
-  def rewards!(reward)
+  def rewards(reward)
     @set_rewards = true
     self.packs       = reward[:packs]
     self.gold        = reward[:gold]
