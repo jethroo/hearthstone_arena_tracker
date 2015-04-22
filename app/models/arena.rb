@@ -17,10 +17,9 @@ class Arena < ActiveRecord::Base
     packs.present? && valid?
   end
 
-  validates_numericality_of(
-    [:packs, :gold, :dust, :cards, :gold_cards],
-    allow_nil: true
-  )
+  validates :packs, :gold, :dust, :cards, :gold_cards,
+            numericality: true,
+            allow_nil: true
 
   validates_each :matches do |arena, attr, _value|
     unless arena.set_rewards

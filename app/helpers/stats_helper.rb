@@ -19,7 +19,7 @@ module StatsHelper
     wins = []
     losses = []
     Hero::HEROS.each do |hero|
-      hero_result = detect_hero(matches)
+      hero_result = detect_hero(matches, hero)
       wins   << (hero_result ? hero_result.wins   : 0)
       losses << (hero_result ? hero_result.losses : 0)
     end
@@ -33,14 +33,14 @@ module StatsHelper
     ]
   end
 
-  def detect_hero(matches)
+  def detect_hero(matches, hero)
     matches.detect { |match| match.hero == hero.to_s }
   end
 
   def hero_stats_graph_array(matches)
     result = []
     Hero::HEROS.each do |hero|
-      hero_result = detect_hero(matches)
+      hero_result = detect_hero(matches, hero)
       next unless hero_result
       result << {
         name: hero.to_s,
