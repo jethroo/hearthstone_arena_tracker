@@ -1,14 +1,16 @@
 module StatsHelper
   def win_loss_data
-    hero_stats_graph_array(query_hero_stats)
+    hero_stats_graph_array(query_hero_stats(''))
   end
 
   def win_loss_over_time_data
-    [over_time_data(true), over_time_data(false)]
+    [over_time_data('TRUE'), over_time_data('FALSE')]
   end
 
   def arena_win_loss_by_class_data
-    arena_win_loss_by_class_array(query_hero_stats(true))
+    arena_win_loss_by_class_array(
+      query_hero_stats('AND matches.arena_id IS NOT NULL')
+    )
   end
 
   private
@@ -17,7 +19,7 @@ module StatsHelper
     wins = []
     losses = []
     Hero::HEROS.each do |hero|
-      hero_result = matches.detect { |m| m.hero == hero.to_s }
+      hero_result = detect_hero(matches)
       wins   << (hero_result ? hero_result.wins   : 0)
       losses << (hero_result ? hero_result.losses : 0)
     end
@@ -31,10 +33,14 @@ module StatsHelper
     ]
   end
 
+  def detect_hero(matches)
+    matches.detect { |match| match.hero == hero.to_s }
+  end
+
   def hero_stats_graph_array(matches)
     result = []
     Hero::HEROS.each do |hero|
-      hero_result = matches.detect { |m| m.hero == hero.to_s }
+      hero_result = detect_hero(matches)
       next unless hero_result
       result << {
         name: hero.to_s,
@@ -44,41 +50,44 @@ module StatsHelper
     result
   end
 
-  def query_hero_stats(arena_only = false)
+  def query_hero_stats(arena_part)
     query = <<-SQL
       SELECT matches.hero,
         COUNT( CASE WHEN matches.won IS TRUE THEN 1 ELSE NULL END) AS wins,
         COUNT( CASE WHEN matches.won IS FALSE THEN 1 ELSE NULL END) AS losses
         FROM matches
         WHERE matches.user_id = ?
-        #{'AND matches.arena_id IS NOT NULL' if arena_only}
+        %s
         GROUP BY matches.hero
       SQL
 
-    Match.find_by_sql([query, current_user.id])
+    Match.find_by_sql([query % arena_part, current_user.id])
   end
 
-  def over_time_data(wins = true)
+  def over_time_data(type)
     result = []
-    over_time(wins).each do |day|
-      result << [day.day.to_time.to_i * 1000, day.wins]
+    over_time(type).each do |day_result|
+      result << [day_result.day.to_time.to_i * 1000, day_result.wins]
     end
 
     {
-      name: wins ? 'Wins' : 'Loses',
+      name: type == 'TRUE' ? 'Wins' : 'Loses',
       data: result
     }
   end
 
-  def over_time(wins = true)
-    query = <<-SQL
+  def over_time(type)
+    Match.find_by_sql([over_time_query % type, current_user.id])
+  end
+
+  def over_time_query
+    <<-SQL
       SELECT DATE(created_at) AS day, COUNT(*) AS wins
         FROM matches
         WHERE matches.user_id = ?
-        AND matches.won IS #{ wins ? TRUE : FALSE}
+        AND matches.won IS %s
         GROUP BY day
         ORDER BY day ASC
-      SQL
-    Match.find_by_sql([query, current_user.id])
+    SQL
   end
 end

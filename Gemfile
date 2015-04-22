@@ -66,6 +66,8 @@ group :development, :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
+  #gem "rubycritic", :require => false
+  gem 'rubycritic', :git => '../rubycritic', :branch => 'feature/adding_link_to_smell_documentation'
 end
 
 ruby '2.2.0'

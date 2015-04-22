@@ -1,7 +1,7 @@
 class Match < ActiveRecord::Base
   include Hero
 
-  OPPONENTS = HEROS.dup.map { |h| "opponent_#{h}" }
+  OPPONENTS = HEROS.dup.map { |hero| "opponent_#{hero}" }
 
   belongs_to :user
   belongs_to :arena
