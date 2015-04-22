@@ -7,20 +7,7 @@
   </div>
 </div>
 
-<div class="medium-8 large-10 columns">
-  <h2>Add a match with one click!</h2>
-  <div id="new_matches" data-action-url="<%= matches_path %>">
-  </div>
-  <div class="small-block-grid-3 medium-block-grid-6 large-block-grid-9">
-    <% %w(win loose).each do |result| %>
-     <% Arena::HEROS.each do |hero| %>
-        <li class="match_<%= result %>">
-          <%= link_to image_tag("heroes/#{hero}_small_circle.png"),"#", value: "#{hero}" %>
-        </li>
-      <% end %>
-    <% end %>
-  </div>
-</div>
+<%= render partial: "shared/new_match_grid" %>
 
 <div>
   <%= hidden_field_tag 'open_wins', arena.open_wins %>

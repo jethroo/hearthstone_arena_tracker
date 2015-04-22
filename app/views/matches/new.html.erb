@@ -6,20 +6,7 @@
   <%= select_tag :hero, options_for_select(Arena::HEROS), include_blank: true %>
 </div>
 
-<div class="medium-8 large-10 columns">
-  <h2>Add a match with one click!</h2>
-  <div id="new_matches" data-action-url="<%= matches_path %>">
-  </div>
-  <div id="newMatchGrid" class="small-block-grid-3 medium-block-grid-6 large-block-grid-9">
-    <% %w(win loose).each do |result| %>
-     <% Arena::HEROS.each do |hero| %>
-        <li id="<%= result %>_vs_<%= hero %>" class="match_<%= result %>">
-          <%= link_to image_tag("heroes/#{hero}_small_circle.png"),"#", value: "#{hero}" %>
-        </li>
-      <% end %>
-    <% end %>
-  </div>
-</div>
+<%= render partial: "shared/new_match_grid" %>
 
 <div class="large-12">
   <hr>

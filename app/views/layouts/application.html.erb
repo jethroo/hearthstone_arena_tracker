@@ -33,7 +33,7 @@
             <!-- Left Nav Section -->
             <% if logged_in? %>
               <ul class="left">
-                <li class="has-dropdown">
+                <li id="arenasMenue" class="has-dropdown">
                   <a href="<%= arenas_path %>">
                     <span class="fi-torsos">
                       Arenas
@@ -41,7 +41,7 @@
                   </a>
                   <ul class="dropdown">
                     <li class="active">
-                      <a href="<%= new_arena_path  %>">
+                      <a id="addArenaMenueItem" href="<%= new_arena_path  %>">
                         <span class="fi-plus">
                           Add new Arena
                         <span>

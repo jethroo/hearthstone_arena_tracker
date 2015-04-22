@@ -8,10 +8,5 @@ if Rails.env.development? || Rails.env.test?
 
       task.pattern = file_list
     end
-
   end
 end
-
-
-
-
