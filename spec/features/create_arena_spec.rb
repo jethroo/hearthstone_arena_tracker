@@ -7,5 +7,7 @@ describe 'create a arena process', type: :feature do
     select 'rexxar', from: 'arena_hero'
     click_button 'Create'
     find('#newMatchGrid')
+    find('#win_vs_anduin a').click
+    expect(page).to have_css('.match_result', count: 1)
   end
 end

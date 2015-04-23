@@ -1,4 +1,4 @@
-<div class="small-12 medium-6 large-4 columns arena_box">
+<div id="arena_<%= arena.id %>" class="small-12 medium-6 large-4 columns arena_box">
   <div class="large-12 columns">
     <div class="round info label">
       <%= arena_counter + 1 %>
@@ -29,7 +29,7 @@
         </li>
       <% else %>
         <li>
-          <%= link_to "Play", arena_path(arena), class: "button tiny" %>
+          <%= link_to "Play", arena_path(arena), class: "button tiny", id: "play_arena_#{arena.id}" %>
         </li>
         <li>
           <div class="button tiny disabled">

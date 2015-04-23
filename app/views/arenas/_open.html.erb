@@ -18,7 +18,13 @@
   <a class="close-reveal-modal">&#215;</a>
   <h2>Arena finished</h2>
   Awesome, go and claim your arena rewards.
-  <p><%= link_to "Claim your reward!", arena_path(arena), class: "button" %></p>
+  <p>
+    <%= link_to "Claim your reward!",
+           arena_path(arena),
+           class: "button",
+           id: "claim_reward_link"
+    %>
+  </p>
 </div>
 
 <div class="large-12">
@@ -30,7 +36,8 @@
 
 <div class="large-12">
   <div id="my_matches">
-    <%= render partial: "matches/match_create_row", collection: arena.matches.decorate, as: :match %>
+    <%= render partial: "matches/match_create_row",
+          collection: arena.matches.decorate, as: :match %>
   </div>
 </div>
 
