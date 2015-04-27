@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def create
     user = User.create(user_params)
     if user.persisted?
-      flash[:success] = "Ẃelcome on board #{user_params[:name]}"
+      flash[:success] = "Welcome on board #{user_params[:name]}"
       log_in user
       redirect_to :root
     else
