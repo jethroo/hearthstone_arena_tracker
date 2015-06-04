@@ -17,6 +17,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    max_hero_matches = Match
+                       .where(user_id: params[:id])
+                       .select(:hero).group(:hero)
+                       .count
+                       .max_by { |_, value| value }
+
+    render locals: {
+      user: User.find_by_id(params[:id]),
+      max_matches: max_hero_matches[1],
+      max_hero: Match.heros.select do |_, value|
+        value == max_hero_matches[0]
+      end.keys.first
+    }
+  end
+
   private
 
   def user_params
