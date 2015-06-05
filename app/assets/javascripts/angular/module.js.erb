@@ -5,14 +5,44 @@
 
   angular.module("ng_hat").controller("MatchesController", function($scope, MatchesFactory ) {
     $scope.matches = MatchesFactory.getMatches();
+
+    var counter = 5;
+    $scope.loadMore = function() {
+        for (var i = 0; i < 10; i++) {
+            counter += 1;
+            $scope.matches.push(counter);
+
+        }
+    };
+
+    $scope.loadMore();
   });
 
   angular.module("ng_hat").factory("MatchesFactory", function() {
     var matches = [1,2,3,4];
+    var counter = 5;
     return {
       getMatches: function() {
         return matches;
+      },
+      loadMore: function() {
+        for (var i = 0; i < 5; i++) {
+          counter += 1;
+          matches.push(counter);
+        }
       }
+    };
+  });
+
+  angular.module("ng_hat").directive('whenScrolled', function() {
+    return function(scope, elm, attr) {
+      var raw = elm[0];
+
+      elm.bind('scroll', function() {
+        if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
+          scope.$apply(attr.whenScrolled);
+        }
+      });
     };
   });
 

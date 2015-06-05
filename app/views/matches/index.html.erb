@@ -1,7 +1,7 @@
 <h2>My matches</h2>
 
 <div ng-controller="MatchesController">
-  <div id="fixed">
+  <div id="fixed" style="height: 100px; overflow-y: scroll;" when-scrolled="loadMore()">
     <ul>
       <li ng-repeat="match in matches">{{match}}</li>
     </ul>
