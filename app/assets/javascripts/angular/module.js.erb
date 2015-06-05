@@ -1,0 +1,20 @@
+(function() {
+  "use strict";
+
+  angular.module("ng_hat", []);
+
+  angular.module("ng_hat").controller("MatchesController", function($scope, MatchesFactory ) {
+    $scope.matches = MatchesFactory.getMatches();
+  });
+
+  angular.module("ng_hat").factory("MatchesFactory", function() {
+    var matches = [1,2,3,4];
+    return {
+      getMatches: function() {
+        return matches;
+      }
+    };
+  });
+
+}());
+

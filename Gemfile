@@ -38,6 +38,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'highcharts-rails', '~> 3.0.0'
+gem 'angularjs-rails'
 
 gem 'rubocop', require: false
 

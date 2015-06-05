@@ -40,6 +40,7 @@ GEM
     adamantium (0.2.0)
       ice_nine (~> 0.11.0)
       memoizable (~> 0.4.0)
+    angularjs-rails (1.4.0)
     arel (6.0.0)
     ast (2.0.0)
     astrolabe (1.3.0)
@@ -300,6 +301,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  angularjs-rails
   bcrypt (~> 3.1.7)
   byebug
   capybara

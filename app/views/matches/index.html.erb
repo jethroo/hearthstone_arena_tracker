@@ -1,5 +1,13 @@
 <h2>My matches</h2>
 
+<div ng-controller="MatchesController">
+  <div id="fixed">
+    <ul>
+      <li ng-repeat="match in matches">{{match}}</li>
+    </ul>
+  </div>
+</div>
+
 <div class="large-12">
   <div id="my_matches">
     <%= render partial: "match_index_row", collection: matches.decorate, as: :match %>
