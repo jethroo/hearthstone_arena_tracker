@@ -3,17 +3,7 @@
 <div ng-controller="MatchesController">
   <div id="fixed" style="position: absolute; height: 80%; overflow-y: scroll;" when-scrolled="matchesFactory.loadMore()">
     <div class="small-12 medium-6 large-4 columns match_result_box" ng-repeat='match in matches'>
-      <div class="match_result">
-        {{match}}
-      </div>
+      <%= render partial: "match" %>
     </div>
   </div>
 </div>
-
-<% if false %>
-<div class="large-12">
-  <div id="my_matches">
-    <%= render partial: "match_index_row", collection: matches.decorate, as: :match %>
-  </div>
-</div>
-<% end %>

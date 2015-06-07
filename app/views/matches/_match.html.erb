@@ -1,0 +1,16 @@
+<div class="match_result">
+  <div class="row match_counter">
+    <div class="round info label">
+      {{match.number}}
+    </div>
+    <div class="arena" ng-show="match.arena_link" >
+      {{match.arena_link}}
+    </div>
+  </div>
+  <div class="row">
+      {{match.hero_image}} vs. {{match.opponent_image}}
+  </div>
+  <div class="row">
+    {{match.created_at}}
+  </div>
+</div>

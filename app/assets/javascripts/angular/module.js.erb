@@ -12,7 +12,7 @@
     var counter = 1;
     for (var i = 0; i < 100; i++) {
       counter += 1;
-      matches.push(counter);
+      matches.push({ number: counter, arena_link: "foo" });
     };
 
     return {
@@ -22,7 +22,7 @@
       loadMore: function() {
         for (var i = 0; i < 5; i++) {
           counter += 1;
-          matches.push(counter);
+          matches.push({ number: counter });
         }
       }
     };
