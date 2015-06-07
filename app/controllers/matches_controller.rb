@@ -1,11 +1,19 @@
 class MatchesController < ApplicationController
   def index
-    render locals: {
-      matches: current_user
-        .matches
-        .includes(:arena)
-        .order(created_at: :desc)
-    }
+    matches = current_user
+              .matches
+              .includes(:arena)
+              .order(created_at: :desc)
+              .paginate(page: params[:page], per_page: params[:per_page] )
+
+    respond_to do |format|
+      format.html do
+        render
+      end
+      format.json do
+        render layout: false, json: matches
+      end
+    end
   end
 
   def new
