@@ -3,8 +3,8 @@
     <div class="round info label">
       {{match.id}}
     </div>
-    <div class="arena" ng-show="match.arena_link" >
-      {{match.arena_link}}
+    <div class="arena" ng-show="match.arenaLink" >
+      <a ng-href="{{match.arenaLink}}">{{match.arenaId}}</a>
     </div>
   </div>
   <div class="row">

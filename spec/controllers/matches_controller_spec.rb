@@ -11,23 +11,6 @@ describe MatchesController, type: :controller do
   end
 
   describe 'index' do
-    before do
-      allow(controller).to receive(:render)
-      allow(user).to receive(:matches).and_return(matches)
-      allow(matches).to receive(:includes).with(:arena).and_return(matches)
-      allow(matches)
-        .to receive(:order).with(created_at: :desc).and_return(matches)
-    end
-
-    after do
-      expect(controller)
-        .to have_received(:render).with(locals: { matches: matches })
-      expect(matches)
-        .to have_received(:includes).with(:arena)
-      expect(matches)
-        .to have_received(:order).with(created_at: :desc)
-    end
-
     it 'renders index' do
       expect(get :index).to be_ok
     end

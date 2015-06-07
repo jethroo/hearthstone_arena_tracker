@@ -22,6 +22,15 @@ class MatchDecorator < Draper::Decorator
     model.won? ? "win" : "loose"
   end
 
+  def arena_link
+    h.arena_path(model.arena) if model.arena
+  end
+
+  def arena_id
+    model.arena.id if model.arena
+  end
+
+
   def as_json(options = {})
     super(
       methods: [
@@ -31,7 +40,9 @@ class MatchDecorator < Draper::Decorator
         :hero_image,
         :opponent,
         :opponent_image,
-        :won
+        :won,
+        :arena_link,
+        :arena_id
       ]
     )
   end
