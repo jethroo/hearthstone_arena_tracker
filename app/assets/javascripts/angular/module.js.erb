@@ -11,6 +11,7 @@
     var matches = [];
     var page = 1
     var fetched_all = false;
+    var fetching = false;
 
     return {
       matches: function() {
@@ -20,8 +21,7 @@
       getMatches: function() {
         var factory = this;
         Match.query({page: 1, per_page: 50 }).then(function (results) {
-          page = 6
-          console.log(results)
+          page = 6;
           results.forEach(function(match) {
             factory.pushMatch(match);
           });
@@ -30,8 +30,9 @@
         });
       },
       loadMore: function() {
-        if (!fetched_all) {
-          var factory = this;
+        var factory = this;
+        if (!fetched_all && !fetching) {
+          fetching = true;
           Match.query({page: page, per_page: 10}).then(function (results) {
             if (results.length > 0) {
               page++;
@@ -41,8 +42,10 @@
             } else {
               fetched_all = true;
             }
+            fetching = false;
           }, function (error) {
             // do something about the error
+            fetching = false;
           });
         }
       },
@@ -54,7 +57,8 @@
             hero: match.hero,
             heroImage: match.heroImage,
             opponent: match.opponent,
-            opponentImage: match.opponentImage
+            opponentImage: match.opponentImage,
+            won: match.won
           }
         );
       }
@@ -78,6 +82,14 @@
         }
       });
     };
+  });
+
+  angular.module('ng_hat').directive('matchesScrollList', function() {
+    return function (scope, element, attrs) {
+      console.log($(window).height());
+      console.log($('#content').offset().top);
+      element.height($(window).height() - $('#content').offset().top );
+    }
   });
 
 }());

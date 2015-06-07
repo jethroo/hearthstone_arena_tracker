@@ -18,6 +18,10 @@ class MatchDecorator < Draper::Decorator
     h.image_path("heroes/#{opponent}_small_circle.png")
   end
 
+  def won
+    model.won? ? "win" : "loose"
+  end
+
   def as_json(options = {})
     super(
       methods: [
@@ -26,7 +30,8 @@ class MatchDecorator < Draper::Decorator
         :hero,
         :hero_image,
         :opponent,
-        :opponent_image
+        :opponent_image,
+        :won
       ]
     )
   end
