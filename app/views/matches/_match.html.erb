@@ -8,9 +8,11 @@
     </div>
   </div>
   <div class="row">
-    {{match.hero}} vs. {{match.opponent}}
+   <img ng-src="{{match.heroImage}}"/>
+    vs.
+    <img ng-src="{{match.opponentImage}}"/>
   </div>
   <div class="row">
-    {{match.created_at}}
+    {{match.createdAt}}
   </div>
 </div>

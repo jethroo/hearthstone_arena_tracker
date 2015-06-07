@@ -4,7 +4,8 @@ class MatchesController < ApplicationController
               .matches
               .includes(:arena)
               .order(created_at: :desc)
-              .paginate(page: params[:page], per_page: params[:per_page] )
+              .paginate(page: params[:page], per_page: params[:per_page])
+              .decorate
 
     respond_to do |format|
       format.html do
