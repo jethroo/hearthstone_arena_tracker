@@ -1,0 +1,18 @@
+<div class="match_result {{match.won}}">
+  <div class="row match_counter ">
+    <div class="round info label">
+      {{match.id}}
+    </div>
+    <div class="arena" ng-show="match.arenaLink" >
+      <a ng-href="{{match.arenaLink}}">{{match.arenaId}}</a>
+    </div>
+  </div>
+  <div class="row">
+   <img ng-src="{{match.heroImage}}"/>
+    vs.
+    <img ng-src="{{match.opponentImage}}"/>
+  </div>
+  <div class="row">
+    {{match.createdAt}}
+  </div>
+</div>

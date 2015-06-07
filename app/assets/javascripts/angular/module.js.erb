@@ -1,0 +1,97 @@
+(function() {
+  "use strict";
+  angular.module('ng_hat', ['rails']);
+
+  angular.module("ng_hat").controller("MatchesController", function($scope, MatchesFactory ) {
+    $scope.matchesFactory = MatchesFactory;
+    $scope.matches = $scope.matchesFactory.matches();
+  });
+
+  angular.module("ng_hat").factory("MatchesFactory", function(Match) {
+    var matches = [];
+    var page = 1
+    var fetched_all = false;
+    var fetching = false;
+
+    return {
+      matches: function() {
+        this.getMatches();
+        return matches;
+      },
+      getMatches: function() {
+        var factory = this;
+        Match.query({page: 1, per_page: 50 }).then(function (results) {
+          page = 6;
+          results.forEach(function(match) {
+            factory.pushMatch(match);
+          });
+        }, function (error) {
+          // do something about the error
+        });
+      },
+      loadMore: function() {
+        var factory = this;
+        if (!fetched_all && !fetching) {
+          fetching = true;
+          Match.query({page: page, per_page: 10}).then(function (results) {
+            if (results.length > 0) {
+              page++;
+              results.forEach(function(match) {
+                factory.pushMatch(match);
+              });
+            } else {
+              fetched_all = true;
+            }
+            fetching = false;
+          }, function (error) {
+            // do something about the error
+            fetching = false;
+          });
+        }
+      },
+      pushMatch: function(match) {
+        matches.push(
+          {
+            id: match.id,
+            createdAt: match.createdAt,
+            hero: match.hero,
+            heroImage: match.heroImage,
+            opponent: match.opponent,
+            opponentImage: match.opponentImage,
+            won: match.won,
+            arenaLink: match.arenaLink,
+            arenaId: match.arenaId
+          }
+        );
+      }
+    };
+  });
+
+  angular.module('ng_hat').factory('Match', ['railsResourceFactory', function (railsResourceFactory) {
+    return railsResourceFactory({
+        url: '/matches',
+        name: 'match'
+    });
+  }]);
+
+  angular.module("ng_hat").directive('whenScrolled', function() {
+    return function(scope, elm, attr) {
+      var raw = elm[0];
+
+      elm.bind('scroll', function() {
+        if (raw.scrollTop + raw.offsetHeight + 1 >= raw.scrollHeight ) {
+          scope.$apply(attr.whenScrolled);
+        }
+      });
+    };
+  });
+
+  angular.module('ng_hat').directive('matchesScrollList', function() {
+    return function (scope, element, attrs) {
+      console.log($(window).height());
+      console.log($('#content').offset().top);
+      element.height($(window).height() - $('#content').offset().top );
+    }
+  });
+
+}());

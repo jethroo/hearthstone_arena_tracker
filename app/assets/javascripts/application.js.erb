@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require angular
+//= require angularjs/rails/resource
 //= require foundation
 //= require matches
 //= require highcharts
@@ -42,3 +44,7 @@ function HeroImageUrl () {
 };
 
 new HeroImageUrl
+
+$(document).on('ready page:load', function() {
+  angular.bootstrap(document.body, ['ng_hat']);
+});
