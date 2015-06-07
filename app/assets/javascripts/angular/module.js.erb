@@ -2,12 +2,12 @@
   "use strict";
   angular.module('ng_hat', ['rails']);
 
-  angular.module("ng_hat").controller("MatchesController", function($scope, MatchesFactory ) {
+  angular.module("ng_hat").controller('MatchesController', ['$scope', 'MatchesFactory', function($scope, MatchesFactory ) {
     $scope.matchesFactory = MatchesFactory;
     $scope.matches = $scope.matchesFactory.matches();
-  });
+  }]);
 
-  angular.module("ng_hat").factory("MatchesFactory", function(Match) {
+  angular.module("ng_hat").factory('MatchesFactory', ['Match', function(Match) {
     var matches = [];
     var page = 1
     var fetched_all = false;
@@ -65,7 +65,7 @@
         );
       }
     };
-  });
+  }]);
 
   angular.module('ng_hat').factory('Match', ['railsResourceFactory', function (railsResourceFactory) {
     return railsResourceFactory({
