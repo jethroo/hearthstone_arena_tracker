@@ -3,7 +3,7 @@ require 'simplecov'
 require 'capybara/rspec'
 require 'features_helper'
 
-SimpleCov.start
+SimpleCov.start 'rails'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
