@@ -19,7 +19,7 @@ class MatchDecorator < Draper::Decorator
   end
 
   def won
-    model.won? ? "win" : "loose"
+    model.won? ? 'win' : 'loose'
   end
 
   def arena_link
@@ -30,20 +30,11 @@ class MatchDecorator < Draper::Decorator
     model.arena.id if model.arena
   end
 
-
   def as_json(options = {})
-    super(
-      methods: [
-        :id,
-        :created_at,
-        :hero,
-        :hero_image,
-        :opponent,
-        :opponent_image,
-        :won,
-        :arena_link,
-        :arena_id
-      ]
+    super(options.merge(
+      methods: [:id, :created_at, :hero, :hero_image, :opponent,
+                :opponent_image, :won, :arena_link, :arena_id]
+      )
     )
   end
 end

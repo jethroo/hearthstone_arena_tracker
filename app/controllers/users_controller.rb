@@ -18,14 +18,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    max_hero_matches = Match
-                       .where(user_id: params[:id])
-                       .select(:hero).group(:hero)
-                       .count
-                       .max_by { |_, value| value }
+    max_hero_matches = fetch_max_hero_matches
 
     render locals: {
-      user: User.find_by_id(params[:id]),
+      user: current_user,
       max_matches: max_hero_matches[1],
       max_hero: Match.heros.select do |_, value|
         value == max_hero_matches[0]
@@ -34,6 +30,11 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def fetch_max_hero_matches
+    Match.where(user_id: current_user.id).select(:hero).group(:hero)
+      .count.max_by { |_, value| value }
+  end
 
   def user_params
     params.require(:user).permit(:name, :password, :password_confirmation)

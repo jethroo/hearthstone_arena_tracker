@@ -1,17 +1,8 @@
 class MatchesController < ApplicationController
   def index
     respond_to do |format|
-      format.html do
-        render
-      end
-      format.json do
-        render layout: false,
-               json: current_user.matches
-                     .includes(:arena)
-                     .order(created_at: :desc)
-                     .paginate(page: params[:page], per_page: params[:per_page])
-                     .decorate
-      end
+      format.html { render }
+      format.json { render layout: false, json: decorated_matches }
     end
   end
 
@@ -35,15 +26,6 @@ class MatchesController < ApplicationController
     end
   end
 
-  def edit
-  end
-
-  def show
-  end
-
-  def update
-  end
-
   def destroy
     match = current_user.matches.where(id: params[:id]).first
     if match
@@ -55,6 +37,11 @@ class MatchesController < ApplicationController
   end
 
   private
+
+  def decorated_matches
+    current_user.matches.includes(:arena).order(created_at: :desc)
+      .paginate(page: params[:page], per_page: params[:per_page]).decorate
+  end
 
   def match_params
     params.require(:match).permit(:hero, :win, :opponent, :arena)
