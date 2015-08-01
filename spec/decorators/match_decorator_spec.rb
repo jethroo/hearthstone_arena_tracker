@@ -4,7 +4,10 @@ describe MatchDecorator do
   let(:created_at) { double('time') }
 
   let(:match_double) do
-    double('match', opponent: 'opponent_test', created_at: created_at,
+    double(
+      'match',
+      opponent: 'opponent_test',
+      created_at: created_at,
       hero: 'hero'
     )
   end
