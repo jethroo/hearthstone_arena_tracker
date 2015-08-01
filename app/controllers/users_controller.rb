@@ -19,7 +19,6 @@ class UsersController < ApplicationController
 
   def show
     max_hero_matches = fetch_max_hero_matches
-
     render locals: {
       user: current_user,
       max_matches: max_hero_matches[1],
