@@ -66,4 +66,50 @@ describe MatchDecorator do
       end
     end
   end
+
+  describe '#won' do
+    context 'when match was won' do
+      before do
+        allow(match_double).to receive(:won?).and_return(true)
+      end
+
+      it 'returns won string' do
+        expect(subject.won).to match('win')
+      end
+    end
+
+    context 'when match was lost' do
+      before do
+        allow(match_double).to receive(:won?).and_return(false)
+      end
+
+      it 'returns lost string' do
+        expect(subject.won).to match('loose')
+      end
+    end
+  end
+
+  describe '#arena_id' do
+    context 'when arena present' do
+      let(:arena) { double('arena', id: 123) }
+
+      before do
+        allow(match_double).to receive(:arena).and_return(arena)
+      end
+
+      it 'should return the arena id' do
+        expect(subject.arena_id).to eq(123)
+      end
+    end
+
+    context 'when arena is not presen' do
+      before do
+        allow(match_double).to receive(:arena).and_return(nil)
+      end
+
+      it 'should return nil' do
+        expect(subject.arena_id).to eq(nil)
+      end
+    end
+  end
 end
