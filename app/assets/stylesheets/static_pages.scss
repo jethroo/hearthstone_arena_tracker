@@ -3,7 +3,43 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 @import "foundation";
+@import "partials/mixins";
+@import "partials/keyframes";
 
 .top-bar ul li.alert a {
   background-color: $alert_color !important;
+}
+
+.animation {
+  text-align: center;
+  padding-top: 20px;
+  position: relative;
+  opacity: 0;
+  @include animation(scale 0.4s ease-out 0.6s 1 forwards);
+  -webkit-perspective: 400px;
+  perspective: 400px;
+  img {
+    display: inline-block;
+    width: 130px;
+    position: relative;
+    z-index: 1;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    @include transform-origin(40% 50%);
+    @include animation(product-dance 4s ease 1s infinite);
+  }
+  &:after {
+    content: "";
+    background: #ededed;
+    border-radius: 200px;
+    display: block;
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    left: 50%;
+    margin-left: -60px;
+    bottom: -42px;
+    z-index: 0;
+    @include transform(scale(1, 0.2));
+  }
 }

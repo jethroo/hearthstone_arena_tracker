@@ -1,0 +1,52 @@
+// ----------------------------------------------------------------------
+// --- KEYFRAMES lists all your keyframe functions
+// ----------------------------------------------------------------------
+
+@import "partials/mixins";
+
+@include keyframes(from-left) {
+  0% {
+    @include transform(translate3d(0, 20px, 0));
+    opacity: 0;
+  }
+  100% {
+    @include transform(translate3d(0, 0, 0));
+    opacity: 1;
+  }
+}
+
+@include keyframes(scale) {
+  0% {
+    @include transform(scale(0.5));
+    opacity: 0;
+  }
+  100% {
+    @include transform(translate3d(1));
+    opacity: 1;
+  }
+}
+
+
+@include keyframes(shake) {
+  0%, 100% {
+    @include transform(translate3d(0, 0, 0));
+  }
+
+  10%, 30%, 50%, 70%, 90% {
+    @include transform(translate3d(-10px, 0, 0));
+  }
+
+  20%, 40%, 60%, 80% {
+    @include transform(translate3d(10px, 0, 0));
+  }
+}
+
+
+@include keyframes(product-dance) {
+  0% {
+    @include transform(rotateY(0));
+  }
+  100% {
+    @include transform(rotateY(360deg));
+  }
+}
