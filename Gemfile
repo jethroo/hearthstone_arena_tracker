@@ -64,7 +64,7 @@ group :development, :test do
 
   gem 'rspec-rails', '~> 3.0'
 
-  gem 'shoulda-matchers', require: false
+  gem 'shoulda-matchers', '~> 3.0.0'
   gem 'simplecov', require: false
   gem 'capybara'
   gem 'selenium-webdriver'
