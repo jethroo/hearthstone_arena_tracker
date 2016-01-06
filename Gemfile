@@ -6,14 +6,12 @@ gem 'rails', '4.2.0'
 gem 'rails_12factor', group: :production
 gem 'pg'
 
-gem 'mysql2'
-
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 
 gem 'foundation-rails'
 gem 'modernizr-rails'
-gem 'compass-rails'
+gem 'compass-rails', '~> 2.0.4'
 
 gem 'draper', '~> 1.3'
 
