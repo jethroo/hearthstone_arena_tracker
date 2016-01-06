@@ -38,11 +38,7 @@ describe Match do
     end
 
     context 'validates arena' do
-      let(:arena) do
-        double('arena',
-               marked_for_destruction?: false
-        )
-      end
+      let(:arena) { double('arena', marked_for_destruction?: false) }
 
       let(:match) do
         subject.tap do |match|

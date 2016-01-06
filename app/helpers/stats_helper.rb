@@ -20,7 +20,7 @@ module StatsHelper
     losses = []
     Hero::HEROS.each do |hero|
       hero_result = detect_hero(matches, hero)
-      wins   << (hero_result ? hero_result.wins   : 0)
+      wins << (hero_result ? hero_result.wins : 0)
       losses << (hero_result ? hero_result.losses : 0)
     end
     arena_win_loss_by_class_result(wins, losses)
@@ -67,7 +67,7 @@ module StatsHelper
   def over_time_data(type)
     result = []
     over_time(type).each do |day_result|
-      result << [day_result.day.to_time.to_i * 1000, day_result.wins]
+      result << [day_result.day_in_millis, day_result.wins]
     end
 
     {
@@ -82,12 +82,13 @@ module StatsHelper
 
   def over_time_query
     <<-SQL
-      SELECT DATE(created_at) AS day, COUNT(*) AS wins
+      SELECT EXTRACT(EPOCH FROM created_at::date AT TIME ZONE 'UTC')*1000
+        AS day_in_millis, COUNT(*) AS wins
         FROM matches
         WHERE matches.user_id = ?
         AND matches.won IS %s
-        GROUP BY day
-        ORDER BY day ASC
+        GROUP BY day_in_millis
+        ORDER BY day_in_millis ASC
     SQL
   end
 end

@@ -9,7 +9,7 @@ class Arena < ActiveRecord::Base
   attr_accessor :set_rewards
 
   def finished?
-    matches.where(won: true).count  >= MAX_WINS ||
+    matches.where(won: true).count >= MAX_WINS ||
       matches.where(won: false).count >= MAX_LOSES
   end
 
@@ -40,13 +40,13 @@ class Arena < ActiveRecord::Base
   end
 
   def rewards(reward)
-    @set_rewards = true
+    @set_rewards     = true
     self.packs       = reward[:packs]
     self.gold        = reward[:gold]
     self.dust        = reward[:dust]
     self.cards       = reward[:cards]
     self.gold_cards  = reward[:gold_cards]
-    self.finished_at = Time.now
+    self.finished_at = Time.zone.now
     save
   end
 end
