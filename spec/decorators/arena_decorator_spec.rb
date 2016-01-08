@@ -9,12 +9,12 @@ describe ArenaDecorator do
   describe '#won_count' do
     before do
       allow(match).to receive(:won).and_return(true)
-      allow(matches).to receive(:count).and_call_original
+      allow(matches).to receive(:select).and_call_original
     end
 
     after do
       expect(match).to have_received(:won)
-      expect(matches).to have_received(:count)
+      expect(matches).to have_received(:select)
     end
 
     it 'counts won matches' do
@@ -25,12 +25,12 @@ describe ArenaDecorator do
   describe '#lost_count' do
     before do
       allow(match).to receive(:won).and_return(false)
-      allow(matches).to receive(:count).and_call_original
+      allow(matches).to receive(:select).and_call_original
     end
 
     after do
       expect(match).to have_received(:won)
-      expect(matches).to have_received(:count)
+      expect(matches).to have_received(:select)
     end
 
     it 'counts lost matches' do

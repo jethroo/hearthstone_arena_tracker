@@ -40,7 +40,7 @@ gem 'angularjs-rails'
 gem 'angularjs-rails-resource', '~> 2.0.0'
 gem 'will_paginate', '~> 3.0.6'
 
-gem 'rubocop', require: false
+gem 'rubocop', '~> 0.35.0', require: false
 
 # Use Unicorn as the app server
 # gem 'unicorn'
