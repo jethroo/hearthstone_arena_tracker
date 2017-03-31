@@ -21,9 +21,9 @@ class UsersController < ApplicationController
     max_hero_matches = fetch_max_hero_matches
     render locals: {
       user: current_user,
-      max_matches: max_hero_matches[1],
+      max_matches: max_hero_matches.last,
       max_hero: Match.heros.select do |_, value|
-        value == max_hero_matches[0]
+        value == max_hero_matches.first
       end.keys.first
     }
   end
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 
   def fetch_max_hero_matches
     Match.where(user_id: current_user.id).select(:hero).group(:hero)
-      .count.max_by { |_, value| value }
+         .count.max_by { |_, value| value } || []
   end
 
   def user_params

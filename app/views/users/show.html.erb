@@ -1,8 +1,18 @@
 <h2> Most played Hero</h2>
-<div class="small-6 columns">
-  <%= image_tag("heroes/#{max_hero}.png") %>
-  Matches: <%= max_matches %>
-</div>
+<% if max_matches %>
+  <div class="small-6 columns">
+    <%= image_tag("heroes/#{max_hero}.png") %>
+    Matches: <%= max_matches %>
+  </div>
+<% else %>
+No matches yet.
+
+<a href="<%= new_match_path  %>">
+  <span>
+    Start a Match!
+  <span>
+</a>
+<% end %>
 
 
 
