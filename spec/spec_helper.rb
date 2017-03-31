@@ -2,6 +2,7 @@ require 'support/utilities'
 require 'simplecov'
 require 'capybara/rspec'
 require 'features_helper'
+require 'capybara/poltergeist'
 
 SimpleCov.start 'rails'
 
@@ -17,6 +18,8 @@ RSpec.configure do |config|
   config.order = :random
 
   Kernel.srand config.seed
+
+  Capybara.javascript_driver = :poltergeist
 
   config.include FeaturesHelper, type: :feature
 end
