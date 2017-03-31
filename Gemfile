@@ -65,7 +65,7 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 3.0.0'
   gem 'simplecov', require: false
   gem 'capybara'
-  gem 'selenium-webdriver'
+  gem 'poltergeist'
   gem 'database_cleaner'
   gem "rubycritic", :require => false
 end

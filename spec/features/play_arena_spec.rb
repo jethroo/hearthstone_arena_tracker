@@ -9,7 +9,8 @@ describe 'playing an arena process', type: :feature do
   end
 
   it 'playing an arena after sign in', js: true do
-    find('#arenasMenue').hover.find('#indexArenasMenueItem').click
+    find('#arenasMenue').hover
+    find('#indexArenasMenueItem').click
     find('#my_arenas')
       .find("#arena_#{arena.id}")
       .find("#play_arena_#{arena.id}").click

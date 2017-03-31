@@ -29,14 +29,3 @@ module FeaturesHelper
     )
   end
 end
-
-module Capybara
-  module Node
-    class Element
-      def hover
-        @session.driver.browser.action.move_to(native).perform
-        self
-      end
-    end
-  end
-end
