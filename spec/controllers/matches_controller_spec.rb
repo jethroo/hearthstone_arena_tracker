@@ -12,7 +12,7 @@ describe MatchesController, type: :controller do
 
   describe 'index' do
     it 'renders index' do
-      expect(get :index).to be_ok
+      expect(get(:index)).to be_ok
     end
   end
 
@@ -36,7 +36,7 @@ describe MatchesController, type: :controller do
     end
 
     it 'renders new' do
-      expect(get :new).to be_ok
+      expect(get(:new)).to be_ok
     end
   end
 
@@ -66,7 +66,7 @@ describe MatchesController, type: :controller do
       end
 
       it 'renders create template without layout' do
-        expect(post :create, valid_params).to render_template(:create)
+        expect(post(:create, valid_params)).to render_template(:create)
       end
     end
 
@@ -76,7 +76,7 @@ describe MatchesController, type: :controller do
       end
 
       it 'renders error template without layout' do
-        expect(post :create, valid_params)
+        expect(post(:create, valid_params))
           .to render_template('matches/ajax_error')
       end
     end
@@ -96,7 +96,7 @@ describe MatchesController, type: :controller do
       end
 
       it 'will respond with not_found' do
-        expect(delete :destroy, id: 1).to be_not_found
+        expect(delete(:destroy, id: 1)).to be_not_found
       end
     end
 
@@ -111,7 +111,7 @@ describe MatchesController, type: :controller do
       end
 
       it 'will respond with ok ' do
-        expect(delete :destroy, id: 1).to be_ok
+        expect(delete(:destroy, id: 1)).to be_ok
       end
     end
   end

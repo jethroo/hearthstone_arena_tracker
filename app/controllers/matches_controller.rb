@@ -40,7 +40,7 @@ class MatchesController < ApplicationController
 
   def decorated_matches
     current_user.matches.includes(:arena).order(created_at: :desc)
-      .paginate(page: params[:page], per_page: params[:per_page]).decorate
+                .paginate(page: params[:page], per_page: params[:per_page]).decorate
   end
 
   def match_params
@@ -56,7 +56,7 @@ class MatchesController < ApplicationController
       won: match[:win]
     }
     if match_arena(match[:arena])
-      match_hash.merge!(arena: match_arena(match[:arena]))
+      match_hash[:arena] = match_arena(match[:arena])
     end
 
     match_hash

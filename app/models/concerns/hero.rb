@@ -1,16 +1,16 @@
 module Hero
   extend ActiveSupport::Concern
 
-  HEROS = [
-    :anduin,
-    :garrosh,
-    :guldan,
-    :jaina,
-    :malfurion,
-    :rexxar,
-    :thrall,
-    :uther,
-    :valeera
+  HEROS = %i[
+    anduin
+    garrosh
+    guldan
+    jaina
+    malfurion
+    rexxar
+    thrall
+    uther
+    valeera
   ].freeze
 
   included do

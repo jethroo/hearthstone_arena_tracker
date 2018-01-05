@@ -14,11 +14,9 @@ describe Hero do
       include ActiveModel::Validations
       include ActiveModel::Model
 
-      def self.enum(_)
-      end
+      def self.enum(_); end
 
-      def self.validates(*)
-      end
+      def self.validates(*); end
     end
 
     before do

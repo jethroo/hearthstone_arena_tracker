@@ -33,8 +33,8 @@ class MatchDecorator < Draper::Decorator
   def as_json(options = {})
     super(
       options.merge(
-        methods: [:id, :created_at, :hero, :hero_image, :opponent,
-                  :opponent_image, :won, :arena_link, :arena_id]
+        methods: %i[id created_at hero hero_image opponent
+                    opponent_image won arena_link arena_id]
       )
     )
   end

@@ -2,8 +2,6 @@ class ArenaDecorator < Draper::Decorator
   include GlobalConstants
   delegate_all
 
-  # rubocop:disable Performance/Count
-
   def won_count
     object.matches.select { |match| match.won == true }.size
   end

@@ -6,6 +6,6 @@ require File.expand_path('../config/application', __FILE__)
 
 Rails.application.load_tasks
 
-quality_tasks = %i(rubocop rubycritic)
+quality_tasks = %i[rubocop rubycritic]
 
 task quality: quality_tasks
