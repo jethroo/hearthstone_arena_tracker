@@ -135,7 +135,7 @@ describe ArenasController, type: :controller do
       end
 
       it 'renders show' do
-        expect(put :update, id: 1, arena: valid_arena_params)
+        expect(put(:update, id: 1, arena: valid_arena_params))
           .to render_template(:show)
       end
     end
@@ -180,7 +180,7 @@ describe ArenasController, type: :controller do
     end
 
     it 'renders index' do
-      expect(get :index).to be_ok
+      expect(get(:index)).to be_ok
     end
   end
 end

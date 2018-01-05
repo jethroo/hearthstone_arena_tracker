@@ -3,15 +3,15 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.8'
 
-gem 'rails_12factor', group: :production
 gem 'pg'
+gem 'rails_12factor', group: :production
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 
+gem 'compass-rails', '~> 2.0.4'
 gem 'foundation-rails', '~> 5.5'
 gem 'modernizr-rails', '~> 2.7'
-gem 'compass-rails', '~> 2.0.4'
 
 gem 'draper', '~> 1.3'
 
@@ -35,12 +35,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'highcharts-rails', '~> 3.0.0'
 gem 'angularjs-rails', '~> 1.4'
 gem 'angularjs-rails-resource', '~> 2.0.0'
+gem 'highcharts-rails', '~> 3.0.0'
 gem 'will_paginate', '~> 3.0.6'
 
-gem 'rubocop', '~> 0.35.0', require: false
+gem 'rubocop', require: false
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -49,7 +49,7 @@ gem 'rubocop', '~> 0.35.0', require: false
 # gem 'capistrano-rails', group: :development
 
 # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0', group: :development
+gem 'web-console', '~> 2.0', group: :development
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger
@@ -62,12 +62,12 @@ group :development, :test do
 
   gem 'rspec-rails', '~> 3.0'
 
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'poltergeist'
+  gem 'rubycritic', require: false
   gem 'shoulda-matchers', '~> 3.0.0'
   gem 'simplecov', require: false
-  gem 'capybara'
-  gem 'poltergeist'
-  gem 'database_cleaner'
-  gem "rubycritic", :require => false
 end
 
 ruby '2.2.0'

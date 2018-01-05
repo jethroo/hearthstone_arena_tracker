@@ -24,10 +24,12 @@ class Arena < ActiveRecord::Base
 
   validates_each :matches do |arena, attr, _value|
     unless arena.set_rewards
-      arena.errors.add(
-        attr,
-        'arena is finished'
-      ) if arena.finished?
+      if arena.finished?
+        arena.errors.add(
+          attr,
+          'arena is finished'
+        )
+      end
     end
   end
 

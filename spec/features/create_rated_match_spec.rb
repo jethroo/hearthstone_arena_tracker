@@ -7,7 +7,7 @@ describe 'create a match process', type: :feature do
     find('#addMatchMenueItem').click
     find('#newMatchGrid')
     select 'anduin', from: 'hero'
-    %w(win loose).each do |result|
+    %w[win loose].each do |result|
       Arena::HEROS.each do |hero|
         find("##{result}_vs_#{hero} a").click
       end

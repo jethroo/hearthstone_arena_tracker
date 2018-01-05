@@ -11,6 +11,6 @@ class User < ActiveRecord::Base
   private
 
   def password_required?
-    self.new_record? || self.password?
+    new_record? || password?
   end
 end

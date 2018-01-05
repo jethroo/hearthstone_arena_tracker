@@ -38,8 +38,7 @@ class ArenasController < ApplicationController
     render locals: { arenas: current_user
       .arenas
       .includes(:matches)
-      .order(created_at: :desc)
-                   }
+      .order(created_at: :desc) }
   end
 
   private

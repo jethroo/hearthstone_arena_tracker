@@ -1,8 +1,7 @@
 class StatsController < ApplicationController
   include StatsHelper
 
-  def overview
-  end
+  def overview; end
 
   def win_loss
     respond_to do |format|
